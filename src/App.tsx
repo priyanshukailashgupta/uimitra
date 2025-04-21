@@ -1,0 +1,279 @@
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { motion, useAnimation } from 'framer-motion';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import AboutSection from './components/AboutSection';
+import FloatingParticles from './components/FloatingParticles';
+import ServicesSection from './components/ServicesSection';
+import ContactSection from './components/ContactSection';
+import UIUXSection from './components/UIUXSection';
+import ServicesPage from './components/ServicesPage';
+import AboutPage from './components/AboutPage';
+import ContactPage from './components/ContactPage';
+import TeamPage from './components/TeamPage';
+import SuccessStoriesPage from './components/SuccessStoriesPage';
+import WebDesignPage from './components/WebDesignPage';
+import LogoDesignPage from './components/LogoDesignPage';
+import AppDesignPage from './components/AppDesignPage';
+import GraphicsDesignPage from './components/GraphicsDesignPage';
+import BrandStrategyPage from './components/BrandStrategyPage';
+import BrandGuidelinesPage from './components/BrandGuidelinesPage';
+import BrandIdentityPage from './components/BrandIdentityPage';
+import BrandDevelopmentPage from './components/BrandDevelopmentPage';
+import DigitalMarketingPage from './components/DigitalMarketingPage';
+import SEOServicesPage from './components/SEOServicesPage';
+import SocialMediaMarketingPage from './components/SocialMediaMarketingPage';
+import EmailMarketingPage from './components/EmailMarketingPage';
+import AnalyticsReportingPage from './components/AnalyticsReportingPage';
+import YouTubeMarketingPage from './components/YouTubeMarketingPage';
+import LinkedInMarketingPage from './components/LinkedInMarketingPage';
+import TwitterMarketingPage from './components/TwitterMarketingPage';
+import InstagramMarketingPage from './components/InstagramMarketingPage';
+import OtherPlatformsPage from './components/OtherPlatformsPage';
+import TechnologiesPage from './components/TechnologiesPage';
+import Footer from './components/Footer';
+import AnimatedSection from './components/AnimatedSection';
+import ParallaxText from './components/ParallaxText';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+function App() {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    });
+  }, [controls]);
+
+  return (
+    <Router>
+      <ScrollToTop />
+      <FloatingParticles />
+      <Routes>
+        <Route path="/success-stories" element={
+          <>
+            <Navbar />
+            <SuccessStoriesPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/team" element={
+          <>
+            <Navbar />
+            <TeamPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services" element={
+          <>
+            <Navbar />
+            <ServicesPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/web-design" element={
+          <>
+            <Navbar />
+            <WebDesignPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/logo-design" element={
+          <>
+            <Navbar />
+            <LogoDesignPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/app-design" element={
+          <>
+            <Navbar />
+            <AppDesignPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/graphics-design" element={
+          <>
+            <Navbar />
+            <GraphicsDesignPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/ui-ux-design" element={
+          <>
+            <Navbar />
+            <UIUXSection />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/brand-strategy" element={
+          <>
+            <Navbar />
+            <BrandStrategyPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/brand-guidelines" element={
+          <>
+            <Navbar />
+            <BrandGuidelinesPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/brand-identity" element={
+          <>
+            <Navbar />
+            <BrandIdentityPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/brand-development" element={
+          <>
+            <Navbar />
+            <BrandDevelopmentPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/digital-marketing" element={
+          <>
+            <Navbar />
+            <DigitalMarketingPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/seo" element={
+          <>
+            <Navbar />
+            <SEOServicesPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/social-media" element={
+          <>
+            <Navbar />
+            <SocialMediaMarketingPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/youtube-marketing" element={
+          <>
+            <Navbar />
+            <YouTubeMarketingPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/linkedin-marketing" element={
+          <>
+            <Navbar />
+            <LinkedInMarketingPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/twitter-marketing" element={
+          <>
+            <Navbar />
+            <TwitterMarketingPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/instagram-marketing" element={
+          <>
+            <Navbar />
+            <InstagramMarketingPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/other-platforms" element={
+          <>
+            <Navbar />
+            <OtherPlatformsPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/email-marketing" element={
+          <>
+            <Navbar />
+            <EmailMarketingPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/analytics" element={
+          <>
+            <Navbar />
+            <AnalyticsReportingPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/about" element={
+          <>
+            <Navbar />
+            <AboutPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/contact" element={
+          <>
+            <Navbar />
+            <ContactPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/technology" element={
+          <>
+            <Navbar />
+            <TechnologiesPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/" element={
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={controls}
+          >
+            <Navbar />
+            <Hero />
+            
+            <div className="bg-white">
+              <AnimatedSection className="py-20">
+                <ParallaxText baseVelocity={3} className="py-16" delay={300}>
+                  <span className="text-6xl md:text-7xl font-bold tracking-wider text-gradient">
+                    DESIGN • DEVELOP • DELIVER • &nbsp;
+                  </span>
+                </ParallaxText>
+              </AnimatedSection>
+
+              <AnimatedSection>
+                <AboutSection />
+              </AnimatedSection>
+
+              <AnimatedSection>
+                <ServicesSection />
+              </AnimatedSection>
+
+              <AnimatedSection>
+                <ContactSection />
+              </AnimatedSection>
+            </div>
+
+            <Footer />
+          </motion.div>
+        } />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
