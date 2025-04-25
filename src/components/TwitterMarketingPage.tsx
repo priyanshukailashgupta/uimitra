@@ -29,7 +29,7 @@ const StatCard: React.FC<StatCardProps> = ({ icon, value, label, index }) => {
         className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4"
         whileHover={{ scale: 1.1, rotate: 5 }}
       >
-        {icon}
+        <div className="w-6 h-6 text-primary flex items-center justify-center">{icon}</div>
       </motion.div>
       <div className="text-2xl font-bold text-primary mb-1">{value}</div>
       <div className="text-dark/70">{label}</div>
@@ -59,24 +59,24 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, ite
         className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4"
         whileHover={{ scale: 1.1, rotate: 5 }}
       >
-        {icon}
+        <div className="w-6 h-6 text-primary flex items-center justify-center">{icon}</div>
       </motion.div>
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-dark/70 mb-4">{description}</p>
       
       <ul className="space-y-2">
-        {items.map((item, idx) => (
-          <motion.li
-            key={idx}
-            className="flex items-center gap-2 text-dark/70"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: idx * 0.1 }}
-          >
-            <CheckCircle className="w-4 h-4 text-primary" />
-            {item}
-          </motion.li>
-        ))}
+            {items.map((item, idx) => (
+              <motion.li
+                key={idx}
+                className="flex items-center gap-2 text-dark/70"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.1 }}
+              >
+                <CheckCircle className="w-4 h-4 text-primary" />
+                {item}
+              </motion.li>
+            ))}
       </ul>
     </motion.div>
   );
@@ -103,7 +103,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   const isInView = useInView(cardRef, { once: true });
 
   return (
-    <motion.div
+      <motion.div
       ref={cardRef}
       className="relative rounded-xl overflow-hidden bg-white shadow-lg border border-primary/10"
       initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     >
       <div className="relative p-8">
         <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4">
-          {icon}
+          <div className="w-6 h-6 text-primary flex items-center justify-center">{icon}</div>
         </div>
         <h3 className="text-xl font-bold mb-2 text-dark">{title}</h3>
         <p className="text-dark/80 mb-6">{description}</p>
@@ -202,12 +202,12 @@ const TwitterMarketingPage: React.FC = () => {
     {
       icon: <Rocket />,
       title: "Growth Resources",
-      description: "Tools and strategies for scaling"
+      description: "Tools and strategies for scaling to grow "
     },
     {
       icon: <FileText />,
       title: "Content Library",
-      description: "Curated resources and guides"
+      description: "Curated resources and guides to get content ideas"
     },
     {
       icon: <Globe />,
@@ -266,7 +266,7 @@ const TwitterMarketingPage: React.FC = () => {
     {
       title: "Profile & Brand Setup",
       description: "Professional profile optimization and branding",
-      icon: <UserCircle className="w-6 h-6 text-white" />,
+      icon: <UserCircle className="w-6 h-6" />,
       features: [
         "Bio and username optimization (SEO-friendly)",
         "High-converting banner design",
@@ -279,7 +279,7 @@ const TwitterMarketingPage: React.FC = () => {
     {
       title: "Content Calendar & Posting",
       description: "Strategic content planning and execution",
-      icon: <FileText className="w-6 h-6 text-white" />,
+      icon: <FileText className="w-6 h-6" />,
       features: [
         "Monthly theme-based content calendar",
         "High-performing content strategies",
@@ -292,7 +292,7 @@ const TwitterMarketingPage: React.FC = () => {
     {
       title: "Community Building",
       description: "Authentic engagement and growth",
-      icon: <Users className="w-6 h-6 text-white" />,
+      icon: <Users className="w-6 h-6" />,
       features: [
         "Organic follower growth",
         "Twitter Spaces participation",
@@ -305,7 +305,7 @@ const TwitterMarketingPage: React.FC = () => {
     {
       title: "Advanced Analytics",
       description: "Data-driven insights and optimization",
-      icon: <BarChart className="w-6 h-6 text-white" />,
+      icon: <BarChart className="w-6 h-6" />,
       features: [
         "Engagement rate monitoring",
         "Follower growth tracking",
@@ -481,13 +481,24 @@ const TwitterMarketingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <StatCard
+              <motion.div
                 key={index}
-                icon={stat.icon}
-                value={stat.value}
-                label={stat.label}
-                index={index}
-              />
+                className="p-6 bg-white rounded-xl shadow-lg border border-primary/10"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
+              >
+                <motion.div 
+                  className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
+                  <div className="w-6 h-6 text-primary flex items-center justify-center">{stat.icon}</div>
+                </motion.div>
+                <div className="text-2xl font-bold text-primary mb-1">{stat.value}</div>
+                <div className="text-dark/70">{stat.label}</div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -529,7 +540,7 @@ const TwitterMarketingPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Benefits Section */}
+      {/* Benefits Section - Why Follow UI Mitra */}
       <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <motion.div 
@@ -550,73 +561,36 @@ const TwitterMarketingPage: React.FC = () => {
             </motion.h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                className="p-6 bg-white rounded-xl shadow-lg border border-primary/10"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
-              >
-                <motion.div 
-                  className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+          <div className="relative">
+            <div className="absolute left-0 right-0 h-0.5 bg-primary/10 top-24 hidden md:block" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+              {benefits.map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  className="relative flex flex-col items-center text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
                 >
-                  {benefit.icon}
+                  <motion.div 
+                    className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 relative z-10"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                  >
+                    <div className="w-6 h-6 text-primary">{benefit.icon}</div>
+                  </motion.div>
+                  
+                  <motion.div
+                    className="bg-white rounded-xl p-6 w-full shadow-sm border border-primary/5"
+                    whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
+                  >
+                    <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
+                    <p className="text-dark/70 text-sm leading-relaxed">{benefit.description}</p>
+                  </motion.div>
                 </motion.div>
-                <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
-                <p className="text-dark/70">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Tweet Types Grid */}
-      <div className="py-20 bg-gradient-to-b from-white to-light">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              Content You'll <AnimatedText text="Love" type="highlight" />
-            </motion.h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {tweetTypes.map((type, index) => (
-              <motion.div
-                key={index}
-                className="p-6 bg-white rounded-xl shadow-lg border border-primary/10 text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
-              >
-                <motion.div 
-                  className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  {type.icon}
-                </motion.div>
-                <h3 className="text-xl font-bold mb-2">{type.title}</h3>
-                <p className="text-dark/70">{type.description}</p>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -642,27 +616,52 @@ const TwitterMarketingPage: React.FC = () => {
             </motion.h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {growthStats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="p-6 bg-white rounded-xl shadow-lg border border-primary/10"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
-              >
-                <motion.div 
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br ${getGradientByIndex(index)}`}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 blur-3xl" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+              {growthStats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="group relative overflow-hidden rounded-2xl bg-white shadow-lg border border-primary/10"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
                 >
-                  <div className="text-white">{stat.icon}</div>
-                </motion.div>
-                <h3 className="text-2xl font-bold mb-2 text-primary">{stat.title}</h3>
-                <p className="text-dark/70">{stat.description}</p>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  <div className="relative p-8">
+                    <div className="flex items-start gap-6">
+                  <motion.div
+                        className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                        <div className="w-8 h-8 text-primary flex items-center justify-center">{stat.icon}</div>
+                    </motion.div>
+                      
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold mb-2 text-primary">{stat.title}</h3>
+                        <p className="text-dark/70 text-lg mb-4">{stat.description}</p>
+                        
+                        <div className="mt-4">
+                          <div className="h-2 bg-primary/10 rounded-full overflow-hidden">
+                            <motion.div 
+                              className="h-full bg-gradient-to-r from-primary to-secondary"
+                              initial={{ width: 0 }}
+                              whileInView={{ width: "100%" }}
+                              transition={{ duration: 1, delay: index * 0.2 }}
+                              viewport={{ once: true }}
+                            />
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
               </motion.div>
             ))}
+            </div>
           </div>
         </div>
       </div>
@@ -688,17 +687,47 @@ const TwitterMarketingPage: React.FC = () => {
             </motion.h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-8">
             {growthServices.map((service, index) => (
-              <ServiceCard
+              <motion.div
                 key={index}
-                title={service.title}
-                description={service.description}
-                features={service.features}
-                icon={service.icon}
-                gradient={service.gradient}
-                index={index}
-              />
+                className="relative rounded-2xl overflow-hidden bg-white shadow-lg border border-primary/10"
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
+              >
+                <div className="flex flex-col md:flex-row">
+                  <div className="md:w-1/3 p-8 bg-gradient-to-r from-primary to-secondary flex flex-col items-center justify-center text-white">
+                  <motion.div 
+                      className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 relative bg-white/20"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                  >
+                      <div className="w-8 h-8 text-white flex items-center justify-center">{service.icon}</div>
+                  </motion.div>
+                    <h3 className="text-2xl font-bold text-center text-white">{service.title}</h3>
+                    <p className="text-white/90 text-center mt-2">{service.description}</p>
+                  </div>
+                  <div className="md:w-2/3 p-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {service.features.map((feature, idx) => (
+                        <motion.div
+                        key={idx}
+                          className="flex items-start gap-3 p-4 bg-white rounded-lg border border-primary/5 hover:border-primary/20 transition-colors"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                          whileHover={{ y: -2 }}
+                      >
+                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                          <span className="leading-relaxed text-dark/80">{feature}</span>
+                        </motion.div>
+                    ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -737,10 +766,10 @@ const TwitterMarketingPage: React.FC = () => {
                 whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
               >
                 <motion.div 
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br ${getGradientByIndex(index)}`}
+                  className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 >
-                  <div className="text-white">{service.icon}</div>
+                  <div className="w-6 h-6 text-primary flex items-center justify-center">{service.icon}</div>
                 </motion.div>
                 <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                 <p className="text-dark/70">{service.description}</p>
@@ -750,7 +779,7 @@ const TwitterMarketingPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Target Audience Section */}
+      {/* Target Audience Section - Who Should Focus on X Growth */}
       <div className="py-20 bg-gradient-to-b from-white to-light">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <motion.div 
@@ -771,10 +800,18 @@ const TwitterMarketingPage: React.FC = () => {
             </motion.h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="space-y-16">
             {targetAudience.map((audience, index) => (
               <motion.div
                 key={index}
+                className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-full md:w-1/2">
+                  <motion.div
                 className="p-6 bg-white rounded-xl shadow-lg border border-primary/10"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -783,13 +820,361 @@ const TwitterMarketingPage: React.FC = () => {
                 whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
               >
                 <motion.div 
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br ${getGradientByIndex(index)}`}
+                  className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 >
-                  <div className="text-white">{audience.icon}</div>
+                  <div className="w-6 h-6 text-primary flex items-center justify-center">{audience.icon}</div>
                 </motion.div>
-                <h3 className="text-xl font-bold mb-2">{audience.title}</h3>
-                <p className="text-dark/70">{audience.description}</p>
+                    <h3 className="text-xl font-bold mb-2 text-dark">{audience.title}</h3>
+                    <p className="text-dark/70 mb-4">{audience.description}</p>
+                    <ul className="space-y-2">
+                      {index === 0 && (
+                        <>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Real-time brand presence</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Customer engagement</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Market trend awareness</span>
+                          </li>
+                        </>
+                      )}
+                      {index === 1 && (
+                        <>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Product updates & launches</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>User feedback & support</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Community building</span>
+                          </li>
+                        </>
+                      )}
+                      {index === 2 && (
+                        <>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Thought leadership</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Networking opportunities</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Business growth</span>
+                          </li>
+                        </>
+                      )}
+                      {index === 3 && (
+                        <>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Content distribution</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Audience engagement</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-dark/70">
+                            <CheckCircle className="w-5 h-5 text-primary" />
+                            <span>Breaking news coverage</span>
+                          </li>
+                        </>
+                      )}
+                    </ul>
+              </motion.div>
+                </div>
+                <div className="w-full md:w-1/2 h-64 flex items-center justify-center">
+                  <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {index === 0 && (
+                      <>
+                        {/* Brand Logo Design */}
+                        <motion.path 
+                          d="M50 50L100 30L150 50L150 150L100 170L50 150L50 50Z" 
+                          stroke="var(--primary)" 
+                          strokeWidth="3" 
+                          fill="none"
+                          animate={{ 
+                            pathLength: [0, 1],
+                            opacity: [0, 1]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            ease: "easeInOut" 
+                          }}
+                        />
+                        <motion.path 
+                          d="M70 70L100 55L130 70L130 130L100 145L70 130L70 70Z" 
+                          fill="var(--primary)"
+                          animate={{ 
+                            scale: [1, 1.1, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut" 
+                          }}
+                        />
+                        <motion.path 
+                          d="M85 100L100 90L115 100L100 110L85 100Z" 
+                          fill="white"
+                          animate={{ 
+                            rotate: [0, 360],
+                            scale: [1, 1.2, 1]
+                          }}
+                          transition={{ 
+                            duration: 3, 
+                            repeat: Infinity,
+                            ease: "easeInOut" 
+                          }}
+                        />
+                      </>
+                    )}
+                    {index === 1 && (
+                      <>
+                        {/* SaaS Growth Graph */}
+                        <motion.path 
+                          d="M50 150L70 120L90 140L110 100L130 130L150 80" 
+                          stroke="var(--primary)" 
+                          strokeWidth="3" 
+                          fill="none"
+                          strokeLinecap="round"
+                          animate={{ 
+                            pathLength: [0, 1],
+                            opacity: [0, 1]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            ease: "easeInOut" 
+                          }}
+                        />
+                        <motion.circle 
+                          cx="70" 
+                          cy="120" 
+                          r="5" 
+                          fill="var(--primary)"
+                          animate={{ 
+                            scale: [1, 1.5, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut" 
+                          }}
+                        />
+                        <motion.circle 
+                          cx="90" 
+                          cy="140" 
+                          r="5" 
+                          fill="var(--primary)"
+                          animate={{ 
+                            scale: [1, 1.5, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 0.2
+                          }}
+                        />
+                        <motion.circle 
+                          cx="110" 
+                          cy="100" 
+                          r="5" 
+                          fill="var(--primary)"
+                          animate={{ 
+                            scale: [1, 1.5, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 0.4
+                          }}
+                        />
+                        <motion.circle 
+                          cx="130" 
+                          cy="130" 
+                          r="5" 
+                          fill="var(--primary)"
+                          animate={{ 
+                            scale: [1, 1.5, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 0.6
+                          }}
+                        />
+                        <motion.circle 
+                          cx="150" 
+                          cy="80" 
+                          r="5" 
+                          fill="var(--primary)"
+                          animate={{ 
+                            scale: [1, 1.5, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 0.8
+                          }}
+                        />
+                      </>
+                    )}
+                    {index === 2 && (
+                      <>
+                        {/* Entrepreneur Network */}
+                        <motion.circle 
+                          cx="100" 
+                          cy="100" 
+                          r="40" 
+                          stroke="var(--primary)" 
+                          strokeWidth="3" 
+                          fill="none"
+                          animate={{ 
+                            scale: [1, 1.1, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut" 
+                          }}
+                        />
+                        <motion.circle 
+                          cx="100" 
+                          cy="100" 
+                          r="20" 
+                          fill="var(--primary)"
+                          animate={{ 
+                            scale: [1, 1.2, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut" 
+                          }}
+                        />
+                        {[0, 1, 2, 3, 4].map((i) => (
+                          <motion.circle 
+                            key={i}
+                            cx={100 + 40 * Math.cos(i * (2 * Math.PI / 5))}
+                            cy={100 + 40 * Math.sin(i * (2 * Math.PI / 5))}
+                            r="10"
+                            fill="var(--primary)"
+                            animate={{ 
+                              scale: [1, 1.3, 1],
+                              opacity: [0.7, 1, 0.7]
+                            }}
+                            transition={{ 
+                              duration: 2, 
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: i * 0.2
+                            }}
+                          />
+                        ))}
+                      </>
+                    )}
+                    {index === 3 && (
+                      <>
+                        {/* Media Distribution */}
+                        <motion.rect 
+                          x="50" 
+                          y="50" 
+                          width="100" 
+                          height="100" 
+                          stroke="var(--primary)" 
+                          strokeWidth="3" 
+                          fill="none"
+                          animate={{ 
+                            scale: [1, 1.1, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut" 
+                          }}
+                        />
+                        <motion.path 
+                          d="M50 50L150 50M50 100L150 100M50 150L150 150" 
+                          stroke="var(--primary)" 
+                          strokeWidth="2" 
+                          strokeLinecap="round"
+                          animate={{ 
+                            pathLength: [0, 1],
+                            opacity: [0, 1]
+                          }}
+                          transition={{ 
+                            duration: 1.5, 
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            ease: "easeInOut",
+                            delay: 0.3
+                          }}
+                        />
+                        <motion.path 
+                          d="M50 50L50 150M100 50L100 150M150 50L150 150" 
+                          stroke="var(--primary)" 
+                          strokeWidth="2" 
+                          strokeLinecap="round"
+                          animate={{ 
+                            pathLength: [0, 1],
+                            opacity: [0, 1]
+                          }}
+                          transition={{ 
+                            duration: 1.5, 
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            ease: "easeInOut",
+                            delay: 0.6
+                          }}
+                        />
+                        <motion.circle 
+                          cx="100" 
+                          cy="100" 
+                          r="15" 
+                          fill="var(--primary)"
+                          animate={{ 
+                            scale: [1, 1.2, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut" 
+                          }}
+                        />
+                      </>
+                    )}
+                  </svg>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -817,7 +1202,10 @@ const TwitterMarketingPage: React.FC = () => {
             </motion.h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5 blur-3xl" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
             {expectedResults.map((result, index) => (
               <motion.div
                 key={index}
@@ -829,15 +1217,77 @@ const TwitterMarketingPage: React.FC = () => {
                 whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
               >
                 <motion.div 
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br ${getGradientByIndex(index)}`}
+                  className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 >
-                  <div className="text-white">{result.icon}</div>
+                  <div className="w-6 h-6 text-primary flex items-center justify-center">{result.icon}</div>
                 </motion.div>
-                <h3 className="text-xl font-bold mb-2">{result.title}</h3>
-                <p className="text-dark/70">{result.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-dark">{result.title}</h3>
+                  <p className="text-dark/70 mb-4">{result.description}</p>
+                  <div className="mt-4">
+                    <div className="h-2 bg-primary/10 rounded-full overflow-hidden">
+                      <motion.div 
+                        className="h-full bg-gradient-to-r from-primary to-secondary"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "100%" }}
+                        transition={{ duration: 1, delay: index * 0.2 }}
+                        viewport={{ once: true }}
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-6 grid grid-cols-2 gap-4">
+                    {index === 0 && (
+                      <>
+                        <div className="p-4 bg-primary/5 rounded-lg">
+                          <div className="text-2xl font-bold text-primary mb-1">50%</div>
+                          <div className="text-sm text-dark/70">Faster Growth</div>
+                        </div>
+                        <div className="p-4 bg-secondary/5 rounded-lg">
+                          <div className="text-2xl font-bold text-secondary mb-1">2x</div>
+                          <div className="text-sm text-dark/70">More Engagement</div>
+                        </div>
+                      </>
+                    )}
+                    {index === 1 && (
+                      <>
+                        <div className="p-4 bg-primary/5 rounded-lg">
+                          <div className="text-2xl font-bold text-primary mb-1">75%</div>
+                          <div className="text-sm text-dark/70">Higher Retention</div>
+                        </div>
+                        <div className="p-4 bg-secondary/5 rounded-lg">
+                          <div className="text-2xl font-bold text-secondary mb-1">3x</div>
+                          <div className="text-sm text-dark/70">More Interactions</div>
+                        </div>
+                      </>
+                    )}
+                    {index === 2 && (
+                      <>
+                        <div className="p-4 bg-primary/5 rounded-lg">
+                          <div className="text-2xl font-bold text-primary mb-1">60%</div>
+                          <div className="text-sm text-dark/70">More Leads</div>
+                        </div>
+                        <div className="p-4 bg-secondary/5 rounded-lg">
+                          <div className="text-2xl font-bold text-secondary mb-1">4x</div>
+                          <div className="text-sm text-dark/70">More Conversions</div>
+                        </div>
+                      </>
+                    )}
+                    {index === 3 && (
+                      <>
+                        <div className="p-4 bg-primary/5 rounded-lg">
+                          <div className="text-2xl font-bold text-primary mb-1">80%</div>
+                          <div className="text-sm text-dark/70">Brand Recognition</div>
+                        </div>
+                        <div className="p-4 bg-secondary/5 rounded-lg">
+                          <div className="text-2xl font-bold text-secondary mb-1">5x</div>
+                          <div className="text-sm text-dark/70">More Authority</div>
+                        </div>
+                      </>
+                    )}
+                  </div>
               </motion.div>
             ))}
+            </div>
           </div>
         </div>
       </div>
@@ -864,7 +1314,7 @@ const TwitterMarketingPage: React.FC = () => {
               transition={{ duration: 10, repeat: Infinity }}
             />
             <h2 className="text-3xl md:text-4xl font-bold mb-6 relative z-10">
-              Join Our <AnimatedText text="Community" type="highlight" />
+              Join Our Community 
             </h2>
             <p className="text-xl text-white/90 mb-8 relative z-10">
               Follow us on X for daily inspiration, insights, and interaction.<br/>

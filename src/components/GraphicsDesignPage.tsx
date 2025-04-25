@@ -198,12 +198,12 @@ const GraphicsDesignPage: React.FC = () => {
                 viewport={{ once: true }}
                 whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(237, 24, 79, 0.1)" }}
               >
-                <motion.div 
+                  <motion.div 
                   className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  {service.icon}
-                </motion.div>
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                  >
+                    {service.icon}
+                  </motion.div>
                 <h3 className="text-xl font-bold mb-2 text-dark">{service.title}</h3>
                 <p className="text-dark/70">{service.description}</p>
               </motion.div>

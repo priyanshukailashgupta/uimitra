@@ -21,56 +21,7 @@ const AboutSection: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        {/* Circle */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64"
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        >
-          <Circle className="w-full h-full text-primary/20" />
-        </motion.div>
-
-        {/* Square */}
-        <motion.div
-          className="absolute top-1/2 right-1/4 w-48 h-48"
-          animate={{
-            rotate: [45, 405],
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        >
-          <Square className="w-full h-full text-secondary/20" />
-        </motion.div>
-
-        {/* Triangle */}
-        <motion.div
-          className="absolute bottom-1/4 right-1/3 w-56 h-56"
-          animate={{
-            rotate: [-45, 315],
-            scale: [1, 1.15, 1],
-            opacity: [0.25, 0.45, 0.25],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        >
-          <Triangle className="w-full h-full text-accent/20" />
-        </motion.div>
+      
 
         {/* Additional decorative elements */}
         <motion.div

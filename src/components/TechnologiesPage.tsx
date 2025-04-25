@@ -1,16 +1,21 @@
 import React, { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { 
-  Code, Database, Cloud, Brain, Smartphone, 
-  BarChart, Layout, Globe, ArrowRight, Server,
-  Layers, Zap, CheckCircle, Cpu, Monitor
+  Figma, PenTool, Image, Sparkles, 
+  FileImage, Palette, FileText, Share2,
+  BarChart, Search, Mail, Hash,
+  Calendar, MessageSquare, Video, 
+  ArrowRight, Layers, Zap, CheckCircle,
+  Code, Database, Cloud, Brain, Smartphone,
+  Server, Layers as LucideLayers, Zap as LucideZap, CheckCircle as LucideCheckCircle,
+  Cpu, Monitor
 } from 'lucide-react';
 import AnimatedText from './AnimatedText';
 
 interface Technology {
   name: string;
   description: string;
-  icon: string;
+  icon: React.ReactNode;
   features: string[];
 }
 
@@ -24,202 +29,298 @@ interface TechnologyCategory {
 const TechnologiesPage: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
-  const [selectedCategory, setSelectedCategory] = useState<string>('Frontend');
+  const [selectedCategory, setSelectedCategory] = useState<string>('UI/UX Design');
   const [selectedTech, setSelectedTech] = useState<Technology | null>(null);
 
   const categories: TechnologyCategory[] = [
     {
-      name: 'Frontend',
-      icon: <Layout />,
-      description: 'Building beautiful, responsive user interfaces',
+      name: 'UI/UX Design',
+      icon: <PenTool />,
+      description: 'Tools powering immersive designs & digital experiences',
       technologies: [
         {
-          name: 'React',
-          description: 'A JavaScript library for building user interfaces with reusable components and efficient state management.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg',
+          name: 'Figma',
+          description: 'Interface & interaction design',
+          icon: <Figma className="w-8 h-8" />,
           features: [
-            'Component-Based Architecture',
-            'Virtual DOM',
-            'Rich Ecosystem',
-            'Strong Community Support'
+            'Real-time Collaboration',
+            'Component Libraries',
+            'Prototyping',
+            'Design Systems'
           ]
         },
         {
-          name: 'Next.js',
-          description: 'The React framework for production that enables features like server-side rendering and static site generation.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg',
+          name: 'Adobe XD',
+          description: 'UI/UX prototyping',
+          icon: <PenTool className="w-8 h-8" />,
           features: [
-            'Server-Side Rendering',
-            'Static Site Generation',
-            'API Routes',
-            'Automatic Code Splitting'
+            'Interactive Prototypes',
+            'Auto-Animate',
+            'Repeat Grid',
+            'Voice Prototyping'
           ]
         },
         {
-          name: 'TypeScript',
-          description: 'A typed superset of JavaScript that adds optional types, classes, and modules.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg',
+          name: 'Sketch',
+          description: 'Web & app design layouts',
+          icon: <Image className="w-8 h-8" />,
           features: [
-            'Static Type Checking',
-            'Enhanced IDE Support',
-            'Early Error Detection',
-            'Better Code Organization'
+            'Vector Editing',
+            'Symbols',
+            'Plugins',
+            'Export Options'
+          ]
+        },
+        {
+          name: 'Framer',
+          description: 'Motion & micro-interactions',
+          icon: <Sparkles className="w-8 h-8" />,
+          features: [
+            'Advanced Animations',
+            'Code Components',
+            'Interactive Design',
+            'Real-time Preview'
+          ]
+        },
+        {
+          name: 'Midjourney',
+          description: 'AI-generated design inspiration',
+          icon: <Brain className="w-8 h-8" />,
+          features: [
+            'AI Art Generation',
+            'Style Transfer',
+            'Creative Exploration',
+            'Rapid Prototyping'
+          ]
+        },
+        {
+          name: 'LottieFiles',
+          description: 'Lightweight animations integration',
+          icon: <FileImage className="w-8 h-8" />,
+          features: [
+            'Vector Animations',
+            'Cross-platform',
+            'Lightweight',
+            'Easy Integration'
           ]
         }
       ]
     },
     {
-      name: 'Backend',
-      icon: <Server />,
-      description: 'Powering applications with robust server-side solutions',
+      name: 'Brand Design',
+      icon: <Palette />,
+      description: 'Tools helping us build powerful and lasting brand identities',
       technologies: [
         {
-          name: 'Node.js',
-          description: 'An asynchronous event-driven JavaScript runtime designed to build scalable network applications.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg',
+          name: 'Adobe Illustrator',
+          description: 'Iconic logos & vector graphics',
+          icon: <PenTool className="w-8 h-8" />,
           features: [
-            'Event-Driven Architecture',
-            'Non-Blocking I/O',
-            'Rich Package Ecosystem',
-            'Cross-Platform Support'
+            'Vector Graphics',
+            'Typography Tools',
+            'Color Management',
+            'Artboards'
           ]
         },
         {
-          name: 'Python',
-          description: 'A versatile programming language that emphasizes code readability with its notable use of significant whitespace.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg',
+          name: 'Canva Pro',
+          description: 'Agile brand collateral creation',
+          icon: <FileText className="w-8 h-8" />,
           features: [
-            'Easy to Learn and Read',
-            'Extensive Libraries',
-            'Cross-Platform',
-            'Strong Community'
+            'Templates',
+            'Brand Kits',
+            'Collaboration',
+            'Asset Library'
           ]
         },
         {
-          name: 'Go',
-          description: 'A statically typed, compiled programming language designed at Google, known for its simplicity and efficiency.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg',
+          name: 'CorelDRAW',
+          description: 'High-end brand illustrations',
+          icon: <Image className="w-8 h-8" />,
           features: [
-            'High Performance',
-            'Built-in Concurrency',
-            'Simple Syntax',
-            'Strong Standard Library'
+            'Vector Illustration',
+            'Typography',
+            'Color Management',
+            'Layout Tools'
+          ]
+        },
+        {
+          name: 'Coolors',
+          description: 'Brand color palette generation',
+          icon: <Palette className="w-8 h-8" />,
+          features: [
+            'Color Schemes',
+            'Palette Generation',
+            'Export Options',
+            'Color Harmony'
+          ]
+        },
+        {
+          name: 'Frontify',
+          description: 'Brand guidelines & asset management',
+          icon: <FileText className="w-8 h-8" />,
+          features: [
+            'Brand Guidelines',
+            'Asset Management',
+            'Collaboration',
+            'Version Control'
+          ]
+        },
+        {
+          name: 'Behance',
+          description: 'Creative brand portfolio sharing',
+          icon: <Share2 className="w-8 h-8" />,
+          features: [
+            'Portfolio Showcase',
+            'Creative Community',
+            'Project Sharing',
+            'Networking'
           ]
         }
       ]
     },
     {
-      name: 'AI',
-      icon: <Brain />,
-      description: 'Implementing cutting-edge artificial intelligence solutions',
+      name: 'Digital Marketing',
+      icon: <BarChart />,
+      description: 'Smart tools that drive data-backed digital growth',
       technologies: [
         {
-          name: 'TensorFlow',
-          description: 'An end-to-end open source platform for machine learning, developed by Google Brain.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/tensorflow/tensorflow-original.svg',
+          name: 'Google Analytics',
+          description: 'Web traffic & insights',
+          icon: <BarChart className="w-8 h-8" />,
           features: [
-            'Deep Learning Support',
-            'Flexible Architecture',
-            'Production Ready',
-            'Hardware Acceleration'
+            'Traffic Analysis',
+            'User Behavior',
+            'Conversion Tracking',
+            'Custom Reports'
           ]
         },
         {
-          name: 'PyTorch',
-          description: 'An open source machine learning library developed by Facebook\'s AI Research lab.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/pytorch/pytorch-original.svg',
+          name: 'SEMRush',
+          description: 'SEO strategy & competitor tracking',
+          icon: <Search className="w-8 h-8" />,
           features: [
-            'Dynamic Computational Graphs',
-            'Python Integration',
-            'Research Friendly',
-            'GPU Acceleration'
+            'Keyword Research',
+            'Competitor Analysis',
+            'Backlink Tracking',
+            'Rank Tracking'
+          ]
+        },
+        {
+          name: 'Mailchimp',
+          description: 'Targeted email marketing',
+          icon: <Mail className="w-8 h-8" />,
+          features: [
+            'Email Campaigns',
+            'Automation',
+            'Analytics',
+            'Audience Management'
+          ]
+        },
+        {
+          name: 'Ubersuggest',
+          description: 'Keyword planning',
+          icon: <Hash className="w-8 h-8" />,
+          features: [
+            'Keyword Research',
+            'Content Ideas',
+            'Competitor Analysis',
+            'SEO Audit'
+          ]
+        },
+        {
+          name: 'Moz Pro',
+          description: 'On-page & off-page SEO audits',
+          icon: <Search className="w-8 h-8" />,
+          features: [
+            'Site Audits',
+            'Rank Tracking',
+            'Link Analysis',
+            'Keyword Research'
+          ]
+        },
+        {
+          name: 'Hotjar',
+          description: 'User behavior heatmaps',
+          icon: <Layers className="w-8 h-8" />,
+          features: [
+            'Heatmaps',
+            'Session Recordings',
+            'Feedback Polls',
+            'Conversion Funnels'
           ]
         }
       ]
     },
     {
-      name: 'Mobile',
-      icon: <Smartphone />,
-      description: 'Creating seamless mobile experiences across platforms',
+      name: 'Social Media',
+      icon: <Share2 />,
+      description: 'Boosting your social presence with high-impact tools',
       technologies: [
         {
-          name: 'React Native',
-          description: 'A framework for building native mobile applications using React.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg',
+          name: 'Buffer',
+          description: 'Multi-platform post scheduling',
+          icon: <Calendar className="w-8 h-8" />,
           features: [
-            'Cross-Platform Development',
-            'Native Performance',
-            'Code Reusability',
-            'Hot Reloading'
+            'Post Scheduling',
+            'Analytics',
+            'Team Collaboration',
+            'Content Calendar'
           ]
         },
         {
-          name: 'Flutter',
-          description: 'Google\'s UI toolkit for building natively compiled applications.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg',
+          name: 'Hootsuite',
+          description: 'Social media management',
+          icon: <MessageSquare className="w-8 h-8" />,
           features: [
-            'Single Codebase',
-            'Hot Reload',
-            'Native Performance',
-            'Rich Widget Library'
-          ]
-        }
-      ]
-    },
-    {
-      name: 'Database',
-      icon: <Database />,
-      description: 'Managing data with scalable and efficient solutions',
-      technologies: [
-        {
-          name: 'PostgreSQL',
-          description: 'A powerful, open source object-relational database system.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg',
-          features: [
-            'ACID Compliance',
-            'JSON Support',
-            'Extensibility',
-            'Full-Text Search'
+            'Social Monitoring',
+            'Content Scheduling',
+            'Analytics',
+            'Team Management'
           ]
         },
         {
-          name: 'MongoDB',
-          description: 'A document database designed for ease of development and scaling.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg',
+          name: 'YouTube Studio',
+          description: 'Channel analytics & video optimization',
+          icon: <Video className="w-8 h-8" />,
           features: [
-            'Document Model',
-            'High Scalability',
-            'Flexible Schema',
-            'Rich Queries'
-          ]
-        }
-      ]
-    },
-    {
-      name: 'Cloud',
-      icon: <Cloud />,
-      description: 'Deploying and scaling applications in the cloud',
-      technologies: [
-        {
-          name: 'AWS',
-          description: 'Amazon Web Services, a comprehensive cloud computing platform.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original.svg',
-          features: [
-            'Global Infrastructure',
-            'Extensive Services',
-            'Pay-as-you-go',
-            'High Availability'
+            'Video Analytics',
+            'Content Management',
+            'Monetization',
+            'Audience Insights'
           ]
         },
         {
-          name: 'Google Cloud',
-          description: 'Google\'s suite of cloud computing services.',
-          icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg',
+          name: 'LinkedIn Campaign Manager',
+          description: 'B2B ad strategy',
+          icon: <BarChart className="w-8 h-8" />,
           features: [
-            'Machine Learning',
-            'Big Data',
-            'Kubernetes',
-            'Global Network'
+            'Ad Campaigns',
+            'Audience Targeting',
+            'Performance Tracking',
+            'Lead Generation'
+          ]
+        },
+        {
+          name: 'X Pro',
+          description: 'Real-time engagement tracking',
+          icon: <MessageSquare className="w-8 h-8" />,
+          features: [
+            'Tweet Management',
+            'Analytics',
+            'Team Collaboration',
+            'Content Scheduling'
+          ]
+        },
+        {
+          name: 'Meta Business Suite',
+          description: 'Instagram & Facebook synergy',
+          icon: <Share2 className="w-8 h-8" />,
+          features: [
+            'Cross-platform Management',
+            'Ad Campaigns',
+            'Analytics',
+            'Content Scheduling'
           ]
         }
       ]
@@ -363,11 +464,7 @@ const TechnologiesPage: React.FC = () => {
                             className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center"
                             whileHover={{ scale: 1.1, rotate: 5 }}
                           >
-                            <img 
-                              src={tech.icon} 
-                              alt={tech.name} 
-                              className="w-8 h-8"
-                            />
+                            {tech.icon}
                           </motion.div>
                           <div>
                             <h3 className="text-xl font-bold">{tech.name}</h3>
@@ -392,7 +489,7 @@ const TechnologiesPage: React.FC = () => {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: idx * 0.1 }}
                                   >
-                                    <CheckCircle className="w-4 h-4 text-primary" />
+                                    <LucideCheckCircle className="w-4 h-4 text-primary" />
                                     {feature}
                                   </motion.div>
                                 ))}

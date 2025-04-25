@@ -21,6 +21,7 @@ import BrandStrategyPage from './components/BrandStrategyPage';
 import BrandGuidelinesPage from './components/BrandGuidelinesPage';
 import BrandIdentityPage from './components/BrandIdentityPage';
 import BrandDevelopmentPage from './components/BrandDevelopmentPage';
+import BrandDesignBuildPage from './components/BrandDesignBuildPage';
 import DigitalMarketingPage from './components/DigitalMarketingPage';
 import SEOServicesPage from './components/SEOServicesPage';
 import SocialMediaMarketingPage from './components/SocialMediaMarketingPage';
@@ -32,9 +33,13 @@ import TwitterMarketingPage from './components/TwitterMarketingPage';
 import InstagramMarketingPage from './components/InstagramMarketingPage';
 import OtherPlatformsPage from './components/OtherPlatformsPage';
 import TechnologiesPage from './components/TechnologiesPage';
+import AIEnhancedDesignPage from './components/AIEnhancedDesignPage';
 import Footer from './components/Footer';
 import AnimatedSection from './components/AnimatedSection';
 import ParallaxText from './components/ParallaxText';
+import UIUXGraphicDesignPage from './components/UIUXGraphicDesignPage';
+import DigitalMarketing from './components/DigitalMarketing';
+import SocialMedia from './components/SocialMedia';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -111,10 +116,45 @@ function App() {
             <Footer />
           </>
         } />
+        <Route path="/services/ai-design" element={
+          <>
+            <Navbar />
+            <AIEnhancedDesignPage />
+            <Footer />
+          </>
+        } />
         <Route path="/services/ui-ux-design" element={
           <>
             <Navbar />
             <UIUXSection />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/ui-ux-graphic-design" element={
+          <>
+            <Navbar />
+            <UIUXGraphicDesignPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/services/brand-design-build" element={
+          <>
+            <Navbar />
+            <BrandDesignBuildPage />
+            <Footer />
+          </>
+        } />        
+         <Route path="/services/digital-marketing" element={
+          <>
+            <Navbar />
+            <DigitalMarketing />
+            <Footer />
+          </>
+        } /> 
+        <Route path="/services/social-media" element={
+          <>
+            <Navbar />
+            <SocialMedia />
             <Footer />
           </>
         } />
@@ -146,7 +186,7 @@ function App() {
             <Footer />
           </>
         } />
-        <Route path="/services/digital-marketing" element={
+        <Route path="/services/digital-marketing-page" element={
           <>
             <Navbar />
             <DigitalMarketingPage />
@@ -160,7 +200,7 @@ function App() {
             <Footer />
           </>
         } />
-        <Route path="/services/social-media" element={
+        <Route path="/services/social-media-page" element={
           <>
             <Navbar />
             <SocialMediaMarketingPage />

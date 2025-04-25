@@ -65,9 +65,9 @@ const serviceCategories: Category[] = [
         href: "/services/app-design"
       },
       {
-        name: "Logo Design",
-        description: "Memorable brand identity design",
-        href: "/services/logo-design"
+        name: "AI-Enhanced Design",
+        description: "Smarter, Faster, Creative Experiences",
+        href: "/services/ai-design"
       },
       {
         name: "Graphics Design",
@@ -112,7 +112,7 @@ const serviceCategories: Category[] = [
       {
         name: "Digital Marketing",
         description: "Comprehensive online marketing",
-        href: "/services/digital-marketing"
+        href: "/services/digital-marketing-page"
       },
       {
         name: "SEO Services",
@@ -122,7 +122,7 @@ const serviceCategories: Category[] = [
       {
         name: "Social Media Marketing",
         description: "Social platform strategy",
-        href: "/services/social-media"
+        href: "/services/social-media-page"
       },
       {
         name: "Email Marketing",
