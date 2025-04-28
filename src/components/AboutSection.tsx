@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Circle, Square, Triangle } from 'lucide-react';
+import { ArrowRight, Users, Rocket, Target, Sparkles, Circle, Square, Triangle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedText from './AnimatedText';
 
@@ -8,59 +8,56 @@ const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
 
+  const stats = [
+    { number: "100+", label: "Successful Projects Delivered", icon: <Target size={24} /> },
+    { number: "10k+", label: "Engaged Community Members", icon: <Users size={24} /> },
+    { number: "50%", label: "Annual Growth", icon: <Rocket size={24} /> }
+  ];
+
+  const features = [
+    {
+      title: "Learn by Doing",
+      description: "Get hands-on with real client projects, sharpen your skills, and build a portfolio that speaks volumes.",
+      icon: <Sparkles size={24} />,
+      gradient: "from-[#ED184F]/90 to-[#893168]/95"
+    },
+    {
+      title: "Grow with Community",
+      description: "Experience an environment where knowledge-sharing and teamwork are at the core of everything we do.",
+      icon: <Users size={24} />,
+      gradient: "from-[#4158D0]/90 to-[#2D3A8C]/95"
+    },
+    {
+      title: "Exclusive Networking",
+      description: "Connect with top designers, developers, and industry leaders ready to collaborate and elevate your journey.",
+      icon: <Rocket size={24} />,
+      gradient: "from-[#F05A28]/90 to-[#BE3A1D]/95"
+    },
+    {
+      title: "Mentorship & Growth",
+      description: "Accelerate your career with guidance from experienced mentors and tailored growth paths.",
+      icon: <Target size={24} />,
+      gradient: "from-[#F47A52]/90 to-[#B54F2E]/95"
+    }
+  ];
+
   return (
     <section 
       id="about"
       ref={sectionRef} 
-      className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-20"
     >
-      {/* Animated Background Shapes */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-      
-
-        {/* Additional decorative elements */}
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-32 h-32 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-
-        <motion.div
-          className="absolute bottom-1/3 left-1/4 w-40 h-40 bg-gradient-to-tr from-secondary/10 to-accent/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.5, 0.2],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </motion.div>
-
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+        {/* Hero Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-40">
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
           transition={{ duration: 0.8 }}
         >
           <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-6"
+              className="text-5xl md:text-7xl font-bold mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -74,17 +71,20 @@ const AboutSection: React.FC = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Where <AnimatedText text="Friendship" type="highlight" /> Meets <AnimatedText text="Growth" type="highlight" delay={0.2} />
+              Your Gateway to <AnimatedText text="Growth" type="highlight" />,{' '}
+              <AnimatedText text="Innovation" type="highlight" delay={0.2} />, and{' '}
+              <AnimatedText text="Lasting Connections" type="highlight" delay={0.4} />
           </motion.h2>
 
           <motion.p 
-            className="text-lg md:text-xl text-dark/70 max-w-3xl mx-auto mb-12"
+              className="text-lg text-dark/70 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            A brand that represents friendship and growth in the UI development community. 
-            Help us create a logo that truly reflects our friendly and supportive nature.
+              At UI Mitra, we believe that great things happen when creativity and community come together.
+              We are a fast-growing platform where UI/UX designers, developers, and creative minds collaborate,
+              grow, and succeed — all built on a foundation of friendship and shared growth.
           </motion.p>
 
           <motion.div
@@ -92,7 +92,7 @@ const AboutSection: React.FC = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <Link to="/uiux">
+              <Link to="/join">
               <motion.button
                 className="bg-primary text-white px-8 py-4 rounded-full font-medium text-lg relative overflow-hidden group"
                 whileHover={{ 
@@ -101,7 +101,7 @@ const AboutSection: React.FC = () => {
                 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10">Learn More About UI/UX</span>
+                  <span className="relative z-10">Join UI Mitra Today</span>
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-primary to-secondary"
                   initial={{ x: "100%" }}
@@ -113,30 +113,479 @@ const AboutSection: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        {/* Stats or additional content can be added here */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-          {[
-            { number: "100+", label: "Projects Completed" },
-            { number: "10k+", label: "Community Members" },
-            { number: "50%", label: "Client Satisfaction" }
-          ].map((stat, index) => (
+          {/* Stats Section */}
+          <motion.div
+            className="grid grid-cols-1 gap-6"
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center"
+                className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-primary/10 shadow-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.8 + index * 0.2 }}
-            >
-              <motion.div 
-                className="text-4xl md:text-5xl font-bold text-primary mb-2"
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ y: -5, scale: 1.02 }}
               >
-                {stat.number}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    {stat.icon}
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-primary">{stat.number}</div>
+                    <p className="text-dark/70">{stat.label}</p>
+                  </div>
+                </div>
               </motion.div>
-              <div className="text-dark/70">{stat.label}</div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Features Section */}
+        <motion.div
+          className="space-y-16 mb-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
+          {/* Section Heading */}
+          <motion.div
+            className="text-center mb-16 relative"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20"
+              initial={{ scale: 0, rotate: 0 }}
+              whileInView={{ scale: 1, rotate: 360 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              viewport={{ once: true }}
+            >
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <motion.path
+                  d="M100 0C100 0 150 50 150 100C150 150 100 200 100 200C100 200 50 150 50 100C50 50 100 0 100 0Z"
+                  stroke="var(--primary)"
+                  strokeWidth="2"
+                  fill="none"
+                  animate={{
+                    pathLength: [0, 1],
+                    opacity: [0, 1]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut"
+                  }}
+                />
+              </svg>
+            </motion.div>
+
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              What Makes UI Mitra Different?
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-dark/70 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              We're not just another platform. We're a community-driven ecosystem where creativity meets opportunity.
+            </motion.p>
+          </motion.div>
+
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center relative`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl blur-3xl"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              />
+              
+              <div className="w-full md:w-1/2 relative z-10">
+                <motion.div 
+                  className="bg-white rounded-xl shadow-lg p-6 border border-primary/10"
+                  whileHover={{ 
+                    y: -5,
+                    boxShadow: "0 10px 30px rgba(237, 24, 79, 0.1)"
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.div 
+                    className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                  >
+                    {feature.icon}
+                  </motion.div>
+                  <motion.h3 
+                    className="text-2xl font-bold mb-4"
+                    whileHover={{ color: "var(--primary)" }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {feature.title}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-dark/70 text-lg"
+                    whileHover={{ color: "var(--dark)" }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {feature.description}
+                  </motion.p>
+                </motion.div>
+              </div>
+              
+              <div className="w-full md:w-1/2 h-64 flex items-center justify-center relative z-10">
+                {index === 0 && (
+                  <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Animated Learning Process */}
+                    <motion.path 
+                      d="M50 100L100 50L150 100L100 150L50 100Z" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      fill="none"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut" 
+                      }}
+                    />
+                    <motion.path 
+                      d="M70 100L100 70L130 100" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      strokeLinecap="round"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: 0.5
+                      }}
+                    />
+                    <motion.circle 
+                      cx="100" 
+                      cy="100" 
+                      r="10" 
+                      fill="var(--primary)"
+                      animate={{ 
+                        scale: [1, 1.2, 1],
+                        opacity: [0.7, 1, 0.7]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut" 
+                      }}
+                    />
+                    <motion.path 
+                      d="M85 85L115 115M115 85L85 115" 
+                      stroke="var(--primary)" 
+                      strokeWidth="2" 
+                      strokeLinecap="round"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: 0.7
+                      }}
+                    />
+                    <motion.path 
+                      d="M100 50L100 150M50 100L150 100" 
+                      stroke="var(--primary)" 
+                      strokeWidth="2" 
+                      strokeLinecap="round"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: 0.3
+                      }}
+                    />
+                  </svg>
+                )}
+                {index === 1 && (
+                  <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Animated Users Icon */}
+                    <motion.path 
+                      d="M70 120C70 100 85 90 100 90C115 90 130 100 130 120" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      fill="none"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut" 
+                      }}
+                    />
+                    <motion.circle 
+                      cx="100" 
+                      cy="70" 
+                      r="20" 
+                      fill="var(--primary)"
+                      animate={{ 
+                        scale: [1, 1.1, 1],
+                        opacity: [0.7, 1, 0.7]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut" 
+                      }}
+                    />
+                    <motion.path 
+                      d="M50 120C50 100 65 90 80 90C95 90 110 100 110 120" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      fill="none"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: 0.3
+                      }}
+                    />
+                    <motion.circle 
+                      cx="80" 
+                      cy="70" 
+                      r="15" 
+                      fill="var(--primary)"
+                      animate={{ 
+                        scale: [1, 1.1, 1],
+                        opacity: [0.7, 1, 0.7]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 0.3
+                      }}
+                    />
+                  </svg>
+                )}
+                {index === 2 && (
+                  <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Animated Rocket Icon */}
+                    <motion.path 
+                      d="M100 50L120 80L100 110L80 80L100 50Z" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      fill="var(--primary)"
+                      animate={{ 
+                        y: [0, -10, 0],
+                        opacity: [0.7, 1, 0.7]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut" 
+                      }}
+                    />
+                    <motion.path 
+                      d="M100 110L70 140M100 110L130 140" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      strokeLinecap="round"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: 0.3
+                      }}
+                    />
+                    <motion.circle 
+                      cx="100" 
+                      cy="80" 
+                      r="5" 
+                      fill="var(--primary)"
+                      animate={{ 
+                        scale: [1, 1.5, 1],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 1.5, 
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 0.5
+                      }}
+                    />
+                  </svg>
+                )}
+                {index === 3 && (
+                  <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Animated Target Icon */}
+                    <motion.circle 
+                      cx="100" 
+                      cy="100" 
+                      r="40" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      fill="none"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut" 
+                      }}
+                    />
+                    <motion.circle 
+                      cx="100" 
+                      cy="100" 
+                      r="25" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      fill="none"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: 0.3
+                      }}
+                    />
+                    <motion.circle 
+                      cx="100" 
+                      cy="100" 
+                      r="10" 
+                      fill="var(--primary)"
+                      animate={{ 
+                        scale: [1, 1.2, 1],
+                        opacity: [0.7, 1, 0.7]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 0.6
+                      }}
+                    />
+                    <motion.path 
+                      d="M100 50L100 150M50 100L150 100" 
+                      stroke="var(--primary)" 
+                      strokeWidth="3" 
+                      strokeLinecap="round"
+                      animate={{ 
+                        pathLength: [0, 1],
+                        opacity: [0, 1]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: 0.9
+                      }}
+                    />
+                  </svg>
+                )}
+              </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div
+          className="text-center bg-gradient-to-r from-primary/5 to-secondary/5 p-12 rounded-3xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 1.6 }}
+        >
+          <motion.p 
+            className="text-3xl font-semibold mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 1.8 }}
+          >
+            Learn. Connect. Create. Grow.
+          </motion.p>
+          <motion.p 
+            className="text-xl text-dark/70 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 2 }}
+          >
+            Welcome to UI Mitra — Where Friendship Meets Opportunity.
+          </motion.p>
+          <Link to="/join">
+            <motion.button
+              className="bg-primary text-white px-8 py-4 rounded-full font-medium text-lg relative overflow-hidden group"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 20px rgba(237, 24, 79, 0.4)"
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="relative z-10">Start Your Journey</span>
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-primary to-secondary"
+                initial={{ x: "100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.4 }}
+              />
+            </motion.button>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
