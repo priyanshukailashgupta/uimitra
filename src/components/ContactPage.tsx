@@ -320,10 +320,11 @@ const ContactPage: React.FC = () => {
                     className={getLabelClassName('companyName')}
                     onClick={() => setActiveField('companyName')}
                   >
-                    Company Name
+                    Company Name*
                   </label>
                   <input
                     type="text"
+                    required
                     className={getInputClassName('companyName')}
                     onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                     onFocus={() => setActiveField('companyName')}

@@ -26,7 +26,7 @@ const SocialMedia: React.FC = () => {
         <motion.div 
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)',
+            background: 'linear-gradient(135deg, #ED184F 0%, #D1002E 100%)',
           }}
         />
         <motion.div
@@ -93,13 +93,13 @@ const SocialMedia: React.FC = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                {/* Social Media Hub */}
+                {/* Social Media Network */}
                 <motion.g>
-                  {/* Central Hub */}
+                  {/* Central Engagement Circle */}
                   <motion.circle
                     cx="400"
                     cy="400"
-                    r="60"
+                    r="80"
                     fill="rgba(255, 255, 255, 0.1)"
                     stroke="white"
                     strokeWidth="2"
@@ -114,19 +114,19 @@ const SocialMedia: React.FC = () => {
                     }}
                   />
 
-                  {/* Platform Nodes */}
+                  {/* Social Media Platforms */}
                   {[
-                    { angle: 0, label: "YouTube", icon: "▶️" },
-                    { angle: 72, label: "LinkedIn", icon: "🔗" },
-                    { angle: 144, label: "Twitter", icon: "✖️" },
-                    { angle: 216, label: "Instagram", icon: "📸" },
-                    { angle: 288, label: "Others", icon: "🌍" }
+                    { angle: 0, label: "YouTube", icon: <Youtube className="w-6 h-6" /> },
+                    { angle: 72, label: "LinkedIn", icon: <Linkedin className="w-6 h-6" /> },
+                    { angle: 144, label: "Twitter", icon: <Twitter className="w-6 h-6" /> },
+                    { angle: 216, label: "Instagram", icon: <Instagram className="w-6 h-6" /> },
+                    { angle: 288, label: "Others", icon: <Globe className="w-6 h-6" /> }
                   ].map((platform, i) => (
                     <motion.g key={i}>
                       {/* Platform Node */}
                       <motion.circle
-                        cx={400 + Math.cos(platform.angle * Math.PI / 180) * 150}
-                        cy={400 + Math.sin(platform.angle * Math.PI / 180) * 150}
+                        cx={400 + Math.cos(platform.angle * Math.PI / 180) * 200}
+                        cy={400 + Math.sin(platform.angle * Math.PI / 180) * 200}
                         r="40"
                         fill="rgba(255, 255, 255, 0.1)"
                         stroke="white"
@@ -145,8 +145,8 @@ const SocialMedia: React.FC = () => {
                       
                       {/* Platform Label */}
                       <motion.text
-                        x={400 + Math.cos(platform.angle * Math.PI / 180) * 150}
-                        y={400 + Math.sin(platform.angle * Math.PI / 180) * 150 - 10}
+                        x={400 + Math.cos(platform.angle * Math.PI / 180) * 200}
+                        y={400 + Math.sin(platform.angle * Math.PI / 180) * 200 - 50}
                         fill="white"
                         fontSize="14"
                         textAnchor="middle"
@@ -164,35 +164,13 @@ const SocialMedia: React.FC = () => {
                         {platform.label}
                       </motion.text>
 
-                      {/* Platform Icon */}
-                      <motion.text
-                        x={400 + Math.cos(platform.angle * Math.PI / 180) * 150}
-                        y={400 + Math.sin(platform.angle * Math.PI / 180) * 150 + 10}
-                        fill="white"
-                        fontSize="20"
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          opacity: [0.8, 1, 0.8]
-                        }}
-                        transition={{
-                          duration: 2,
-                          delay: i * 0.3,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        {platform.icon}
-                      </motion.text>
-
-                      {/* Connection Line */}
+                      {/* Engagement Lines */}
                       <motion.path
                         d={`M 400,400 
-                           Q ${400 + Math.cos(platform.angle * Math.PI / 180) * 75},
-                             ${400 + Math.sin(platform.angle * Math.PI / 180) * 75}
-                             ${400 + Math.cos(platform.angle * Math.PI / 180) * 150},
-                             ${400 + Math.sin(platform.angle * Math.PI / 180) * 150}`}
+                           Q ${400 + Math.cos(platform.angle * Math.PI / 180) * 100},
+                             ${400 + Math.sin(platform.angle * Math.PI / 180) * 100}
+                             ${400 + Math.cos(platform.angle * Math.PI / 180) * 200},
+                             ${400 + Math.sin(platform.angle * Math.PI / 180) * 200}`}
                         stroke="white"
                         strokeWidth="2"
                         strokeDasharray="5,5"
@@ -207,6 +185,27 @@ const SocialMedia: React.FC = () => {
                           ease: "linear"
                         }}
                       />
+
+                      {/* Engagement Dots */}
+                      {[0.25, 0.5, 0.75].map((t, dotIndex) => (
+                        <motion.circle
+                          key={dotIndex}
+                          cx={400 + Math.cos(platform.angle * Math.PI / 180) * 200 * t}
+                          cy={400 + Math.sin(platform.angle * Math.PI / 180) * 200 * t}
+                          r="3"
+                          fill="white"
+                          animate={{
+                            scale: [1, 1.5, 1],
+                            opacity: [0.3, 0.8, 0.3]
+                          }}
+                          transition={{
+                            duration: 2,
+                            delay: i * 0.3 + dotIndex * 0.2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        />
+                      ))}
                     </motion.g>
                   ))}
 
@@ -214,7 +213,7 @@ const SocialMedia: React.FC = () => {
                   <motion.circle
                     cx="400"
                     cy="400"
-                    r="200"
+                    r="250"
                     stroke="white"
                     strokeWidth="1"
                     strokeDasharray="8,8"
@@ -229,7 +228,7 @@ const SocialMedia: React.FC = () => {
                     }}
                   />
 
-                  {/* Central Icon */}
+                  {/* Central Engagement Icon */}
                   <motion.g
                     animate={{
                       scale: [1, 1.1, 1],
@@ -274,11 +273,11 @@ const SocialMedia: React.FC = () => {
             Discover how we boost your brand visibility
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-7xl mx-auto mb-8">
             {[
               {
                 icon: <Youtube className="w-8 h-8 text-white" />,
-                emoji: "🎥",
+              
                 title: "YouTube",
                 subtitle: "Targeted Video Campaigns",
                 description: "Fuel your YouTube growth with data-backed video strategies, audience engagement techniques, and creative storytelling that turns viewers into loyal subscribers.",
@@ -287,7 +286,7 @@ const SocialMedia: React.FC = () => {
               },
               {
                 icon: <Linkedin className="w-8 h-8 text-white" />,
-                emoji: "🔗",
+               
                 title: "LinkedIn",
                 subtitle: "Professional Audience Outreach",
                 description: "Connect with decision-makers and build a trusted professional brand. Our LinkedIn strategies drive B2B visibility, thought leadership, and lead generation.",
@@ -296,7 +295,7 @@ const SocialMedia: React.FC = () => {
               },
               {
                 icon: <Twitter className="w-8 h-8 text-white" />,
-                emoji: "✖️",
+              
                 title: "X (Twitter)",
                 subtitle: "Real-Time Trend Marketing",
                 description: "Stay ahead of conversations. We craft agile content strategies for X (Twitter) to help your brand ride trending topics, boost engagement, and stay relevant every day.",
@@ -305,7 +304,7 @@ const SocialMedia: React.FC = () => {
               },
               {
                 icon: <Instagram className="w-8 h-8 text-white" />,
-                emoji: "📸",
+               
                 title: "Instagram",
                 subtitle: "Visual Content Promotion",
                 description: "Make an instant impact. We create captivating Instagram strategies, blending aesthetics with performance-driven content that attracts, engages, and converts followers into fans.",
@@ -314,18 +313,23 @@ const SocialMedia: React.FC = () => {
               },
               {
                 icon: <Globe className="w-8 h-8 text-white" />,
-                emoji: "🌍",
+             
                 title: "Others",
                 subtitle: "Multi-Platform Brand Reach",
                 description: "Beyond the major players, we help brands tap into emerging and niche platforms (Pinterest, Threads, Snapchat, Quora, and more) to expand audience reach where it matters most.",
                 link: "/services/other-platforms",
                 gradient: "from-[#6366F1] to-[#4F46E5]",
-                className: "md:col-span-2 max-w-2xl mx-auto"
+                features: [
+                  "Pinterest Marketing",
+                  "Threads Strategy",
+                  "Snapchat Campaigns",
+                  "Quora Engagement"
+                ]
               }
             ].map((service, index) => (
               <motion.div
                 key={index}
-                className={`relative p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow ${service.className || ''}`}
+                className={`relative p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow ${index === 4 ? 'sm:col-span-2' : ''}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -334,10 +338,19 @@ const SocialMedia: React.FC = () => {
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${service.gradient} flex items-center justify-center mb-4`}>
                   {service.icon}
                 </div>
-                <span className="text-2xl mb-2 inline-block">{service.emoji}</span>
                 <h3 className="text-xl font-bold mb-2 text-dark">{service.title}</h3>
                 <h4 className="text-lg font-semibold mb-3 text-primary">{service.subtitle}</h4>
                 <p className="text-gray-600 mb-4 text-sm">{service.description}</p>
+                {service.features && (
+                  <div className="space-y-1.5 mb-4">
+                    {service.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center gap-2 text-gray-600 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <Link
                   to={service.link}
                   className="inline-flex items-center gap-2 text-primary text-sm font-medium hover:text-primary/80 transition-colors"

@@ -252,34 +252,99 @@ const ContactSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Map or Additional Content */}
-            <motion.div
-              className="mt-12 rounded-xl overflow-hidden relative"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-            >
-              <div className="aspect-video bg-primary/5 rounded-xl border border-primary/10 p-8">
-                <div className="h-full flex items-center justify-center">
-                  <motion.div
-                    className="relative"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      rotate: [0, 5, 0],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <Circle className="w-16 h-16 text-primary/20 absolute -top-8 -left-8" />
-                    <Square className="w-12 h-12 text-secondary/20 absolute -bottom-6 -right-6" />
-                    <Triangle className="w-14 h-14 text-accent/20" />
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
+            {/* Animated Floating Graphics */}
+            <div className="relative h-64 mt-12">
+              {/* Circle - Top Left */}
+              <motion.div
+                className="absolute left-[15%] top-[20%]"
+                animate={{ 
+                  y: [0, -20, 0],
+                  x: [0, 15, 0]
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <div className="w-12 h-12 rounded-full border-2 border-[#ED184F] bg-transparent" />
+              </motion.div>
+
+              {/* Square - Top Right */}
+              <motion.div
+                className="absolute right-[25%] top-[15%]"
+                animate={{ 
+                  rotate: [0, 180, 360],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }}
+              >
+                <div className="w-10 h-10 border-2 border-[#ED184F] bg-transparent" />
+              </motion.div>
+
+              {/* Triangle - Middle Center */}
+              <motion.div
+                className="absolute left-[45%] top-[45%]"
+                animate={{ 
+                  y: [-15, 25, -15],
+                  rotate: [0, 360, 0]
+                }}
+                transition={{
+                  duration: 7,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1
+                }}
+              >
+                <svg width="40" height="35" viewBox="0 0 40 35" fill="none" className="transform-gpu">
+                  <path 
+                    d="M20 2L37.3205 32H2.67949L20 2Z" 
+                    stroke="#ED184F" 
+                    strokeWidth="2"
+                    fill="none"
+                  />
+                </svg>
+              </motion.div>
+
+              {/* Circle - Bottom Right */}
+              <motion.div
+                className="absolute right-[20%] bottom-[25%]"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  x: [10, -10, 10]
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1.5
+                }}
+              >
+                <div className="w-10 h-10 rounded-full border-2 border-[#ED184F] bg-transparent" />
+              </motion.div>
+
+              {/* Square - Bottom Left */}
+              <motion.div 
+                className="absolute left-[25%] bottom-[20%]"
+                animate={{ 
+                  rotate: [-45, 45, -45],
+                  scale: [1, 0.9, 1]
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2
+                }}
+              >
+                <div className="w-9 h-9 border-2 border-[#ED184F] bg-transparent" />
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

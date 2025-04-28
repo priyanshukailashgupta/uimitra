@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
     { name: 'Contact', href: '/contact' }
   ];
 
-  const solutions = [
+  const services = [
     { name: 'UI/UX & Graphic Design', href: '/services/ui-ux-graphic-design' },
     { name: 'Brand Design and Build', href: '/services/brand-design-build' },
     { name: 'Digital Marketing Services', href: '/services/digital-marketing' },
@@ -180,7 +180,7 @@ const Footer: React.FC = () => {
             </ul>
           </motion.div>
 
-          {/* Solutions */}
+          {/* Services */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -188,7 +188,7 @@ const Footer: React.FC = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-lg font-semibold mb-6 relative">
-              Solutions
+              Services
               <motion.span 
                 className="absolute -bottom-2 left-0 w-12 h-0.5 bg-primary"
                 initial={{ width: 0 }}
@@ -197,7 +197,7 @@ const Footer: React.FC = () => {
               />
             </h3>
             <ul className="space-y-3">
-              {solutions.map((solution, index) => (
+              {services.map((solution, index) => (
                 <motion.li
                   key={solution.name}
                   initial={{ opacity: 0, x: -20 }}
@@ -252,7 +252,7 @@ const Footer: React.FC = () => {
                 />
                 <motion.button
                   type="submit"
-                  className="absolute right-2 top-2 -translate-y-1/2 text-primary p-2 rounded-md hover:text-white transition-colors"
+                  className="absolute right-2 top-2 text-primary p-2 rounded-md hover:text-white transition-colors"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
                 >
