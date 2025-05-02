@@ -62,7 +62,7 @@ const AboutSection: React.FC = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <AnimatedText text="UI Mitra" type="gradient" />
+            <AnimatedText text="UI Mitra" type="highlight" /> 
           </motion.h1>
 
           <motion.h2 
@@ -165,24 +165,7 @@ const AboutSection: React.FC = () => {
               transition={{ duration: 1, ease: "easeInOut" }}
               viewport={{ once: true }}
             >
-              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <motion.path
-                  d="M100 0C100 0 150 50 150 100C150 150 100 200 100 200C100 200 50 150 50 100C50 50 100 0 100 0Z"
-                  stroke="var(--primary)"
-                  strokeWidth="2"
-                  fill="none"
-                  animate={{
-                    pathLength: [0, 1],
-                    opacity: [0, 1]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "easeInOut"
-                  }}
-                />
-              </svg>
+              
             </motion.div>
 
             <motion.h2 
@@ -192,7 +175,7 @@ const AboutSection: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              What Makes UI Mitra Different?
+              What Makes  <AnimatedText text="UI Mitra" type="highlight" />  Different?
             </motion.h2>
             <motion.p 
               className="text-xl text-dark/70 max-w-3xl mx-auto"
@@ -544,48 +527,7 @@ const AboutSection: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Call to Action */}
-        <motion.div
-          className="text-center bg-gradient-to-r from-primary/5 to-secondary/5 p-12 rounded-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 1.6 }}
-        >
-          <motion.p 
-            className="text-3xl font-semibold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 1.8 }}
-          >
-            Learn. Connect. Create. Grow.
-          </motion.p>
-          <motion.p 
-            className="text-xl text-dark/70 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 2 }}
-          >
-            Welcome to UI Mitra — Where Friendship Meets Opportunity.
-          </motion.p>
-          <Link to="/join">
-            <motion.button
-              className="bg-primary text-white px-8 py-4 rounded-full font-medium text-lg relative overflow-hidden group"
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 0 20px rgba(237, 24, 79, 0.4)"
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className="relative z-10">Start Your Journey</span>
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-primary to-secondary"
-                initial={{ x: "100%" }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.4 }}
-              />
-            </motion.button>
-          </Link>
-        </motion.div>
+       
       </div>
     </section>
   );

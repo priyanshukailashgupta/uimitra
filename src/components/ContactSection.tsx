@@ -29,19 +29,19 @@ const ContactSection: React.FC = () => {
     {
       icon: <Phone size={20} />,
       title: "Phone",
-      value: "+91 98765 43210",
+      value: "+91-9724823602",
       delay: 0.1
     },
     {
       icon: <Mail size={20} />,
       title: "Email",
-      value: "hello@landin.com",
+      value: "info@uimitra.com",
       delay: 0.2
     },
     {
       icon: <MapPin size={20} />,
       title: "Location",
-      value: "123 Design Street, NY 10001",
+      value: "E10, Green Glen Layout, Outer Ring Road, Bellandur, Bengaluru, Karnataka, India - 560103",
       delay: 0.3
     }
   ];

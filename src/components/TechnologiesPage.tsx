@@ -178,21 +178,15 @@ const TechnologiesPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-24 pb-20 relative overflow-hidden" ref={sectionRef}>
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-transparent py-20">
+      <div className="relative overflow-hidden py-20">
         <motion.div 
-          className="absolute inset-0 opacity-20"
-          animate={{
-            backgroundPosition: ['0% 0%', '100% 100%'],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
+          className="absolute inset-0"
           style={{
-            backgroundImage: 'radial-gradient(circle at center, var(--gradient-1), transparent 50%)',
-            backgroundSize: '100% 100%',
+            background: 'linear-gradient(135deg, #ED184F 0%, #D1002E 100%)',
           }}
+        />
+        <motion.div
+          className="absolute inset-0 bg-white/10 backdrop-blur-sm"
         />
         
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -203,7 +197,7 @@ const TechnologiesPage: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <motion.div
-              className="inline-block mb-4 px-6 py-2 rounded-full bg-primary/10 text-primary"
+              className="inline-block mb-4 px-6 py-2 rounded-full bg-white/20 text-white"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -211,7 +205,7 @@ const TechnologiesPage: React.FC = () => {
             </motion.div>
             
             <motion.h1 
-              className="text-4xl md:text-6xl font-bold mb-6"
+              className="text-4xl md:text-6xl font-bold mb-6 text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -220,7 +214,7 @@ const TechnologiesPage: React.FC = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-lg md:text-xl text-dark/70 max-w-3xl mx-auto mb-12"
+              className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
