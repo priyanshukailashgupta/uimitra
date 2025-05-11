@@ -1,28 +1,81 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Send, Phone, Mail, MapPin, Circle, Square, Triangle } from 'lucide-react';
 import AnimatedText from './AnimatedText';
 import FAQSection from './FAQSection';
+import { supabase, testSupabaseConnection } from '../lib/supabase';
 
 const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
-  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  // Test Supabase connection on component mount
+  useEffect(() => {
+    const testConnection = async () => {
+      const isConnected = await testSupabaseConnection();
+      if (!isConnected) {
+        console.error('Failed to connect to Supabase');
+      }
+    };
+    testConnection();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('sending');
+    setErrorMessage('');
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setFormStatus('success');
-    
-    // Reset form after success
-    if (formRef.current) {
-      formRef.current.reset();
+    try {
+      // Log the data being sent
+      console.log('Submitting form data:', formData);
+
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            full_name: formData.name,
+            email: formData.email,
+            details: formData.message,
+            created_at: new Date().toISOString()
+          }
+        ])
+        .select();
+
+      if (error) {
+        console.error('Supabase error:', error);
+        throw new Error(error.message);
+      }
+
+      console.log('Form submission successful:', data);
+      setFormStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+      
+      // Reset form after success
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+      
+      // Reset form status after 3 seconds
+      setTimeout(() => {
+        setFormStatus('idle');
+      }, 3000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to submit form. Please try again.');
     }
-    setTimeout(() => setFormStatus('idle'), 2000);
   };
 
   const contactInfo = [
@@ -151,6 +204,18 @@ const ContactSection: React.FC = () => {
               onSubmit={handleSubmit} 
               className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-primary/10 relative z-10"
             >
+              {formStatus === 'error' && (
+                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6">
+                  {errorMessage}
+                </div>
+              )}
+              
+              {formStatus === 'success' && (
+                <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg mb-6">
+                  Thank you for your message! We'll get back to you soon.
+                </div>
+              )}
+
               <div className="space-y-6">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -161,8 +226,11 @@ const ContactSection: React.FC = () => {
                   <input
                     type="text"
                     required
+                    value={formData.name}
                     className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                     placeholder="Enter your name"
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    disabled={formStatus === 'sending'}
                   />
                 </motion.div>
 
@@ -175,8 +243,11 @@ const ContactSection: React.FC = () => {
                   <input
                     type="email"
                     required
+                    value={formData.email}
                     className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                     placeholder="Enter your email"
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    disabled={formStatus === 'sending'}
                   />
                 </motion.div>
 
@@ -189,17 +260,20 @@ const ContactSection: React.FC = () => {
                   <textarea
                     required
                     rows={4}
+                    value={formData.message}
                     className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                     placeholder="Tell us about your project..."
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    disabled={formStatus === 'sending'}
                   />
                 </motion.div>
 
                 <motion.button
                   type="submit"
-                  className="w-full bg-primary text-white px-6 py-4 rounded-lg font-medium flex items-center justify-center gap-2 relative overflow-hidden group"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={formStatus !== 'idle'}
+                  className="w-full bg-primary text-white px-6 py-4 rounded-lg font-medium flex items-center justify-center gap-2 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
+                  whileHover={{ scale: formStatus === 'sending' ? 1 : 1.02 }}
+                  whileTap={{ scale: formStatus === 'sending' ? 1 : 0.98 }}
+                  disabled={formStatus === 'sending'}
                 >
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-primary to-secondary"
