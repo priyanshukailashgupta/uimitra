@@ -1325,7 +1325,7 @@ const TwitterMarketingPage: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Follow @UIMintra
+              Follow @UIMitra
               <Twitter className="w-5 h-5" />
             </motion.button>
           </motion.div>

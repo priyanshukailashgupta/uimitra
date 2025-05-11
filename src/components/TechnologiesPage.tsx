@@ -176,9 +176,9 @@ const TechnologiesPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-20 relative overflow-hidden" ref={sectionRef}>
+    <div className="min-h-screen pt-16 sm:pt-20 md:pt-24 pb-20 relative overflow-hidden" ref={sectionRef}>
       {/* Hero Section */}
-      <div className="relative overflow-hidden py-20">
+      <div className="relative overflow-hidden py-12 sm:py-16 md:py-20">
         <motion.div 
           className="absolute inset-0"
           style={{
@@ -189,7 +189,7 @@ const TechnologiesPage: React.FC = () => {
           className="absolute inset-0 bg-white/10 backdrop-blur-sm"
         />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
           <motion.div 
             className="text-center relative z-10"
             initial={{ opacity: 0, y: 20 }}
@@ -197,7 +197,7 @@ const TechnologiesPage: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <motion.div
-              className="inline-block mb-4 px-6 py-2 rounded-full bg-white/20 text-white"
+              className="inline-block mb-4 px-4 sm:px-6 py-2 rounded-full bg-white/20 text-white text-sm sm:text-base"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -205,7 +205,7 @@ const TechnologiesPage: React.FC = () => {
             </motion.div>
             
             <motion.h1 
-              className="text-4xl md:text-6xl font-bold mb-6 text-white"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -214,7 +214,7 @@ const TechnologiesPage: React.FC = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12"
+              className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-8 sm:mb-12 px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -227,15 +227,15 @@ const TechnologiesPage: React.FC = () => {
       </div>
 
       {/* Categories Navigation */}
-      <div className="bg-white py-8 sticky top-20 z-30 border-b border-primary/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex flex-wrap gap-4 justify-center">
+      <div className="bg-white py-4 sm:py-6 md:py-8 sticky top-0 z-30 border-b border-primary/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+          <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
             {categories.map((category) => (
               <motion.button
                 key={category.name}
-                className={`px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 ${
+                className={`px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-full flex items-center gap-2 transition-all duration-300 text-sm sm:text-base whitespace-nowrap ${
                   selectedCategory === category.name 
-                    ? 'bg-primary text-white' 
+                    ? 'bg-primary text-white shadow-lg shadow-primary/20' 
                     : 'bg-primary/5 text-dark hover:bg-primary/10'
                 }`}
                 onClick={() => setSelectedCategory(category.name)}
@@ -243,7 +243,8 @@ const TechnologiesPage: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 {category.icon}
-                {category.name}
+                <span className="hidden sm:inline">{category.name}</span>
+                <span className="sm:hidden">{category.name.split(' ')[0]}</span>
               </motion.button>
             ))}
           </div>
@@ -251,8 +252,8 @@ const TechnologiesPage: React.FC = () => {
       </div>
 
       {/* Technologies Grid */}
-      <div className="py-20 bg-gradient-to-b from-white to-light">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white to-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
           {categories.map((category) => (
             <AnimatePresence key={category.name}>
               {selectedCategory === category.name && (
@@ -263,14 +264,14 @@ const TechnologiesPage: React.FC = () => {
                   transition={{ duration: 0.5 }}
                 >
                   <motion.div 
-                    className="text-center mb-16"
+                    className="text-center mb-8 sm:mb-12 md:mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                   >
                     <motion.h2 
-                      className="text-3xl md:text-4xl font-bold mb-6"
+                      className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.1 }}
@@ -279,7 +280,7 @@ const TechnologiesPage: React.FC = () => {
                       {category.name} <AnimatedText text="Technologies" type="highlight" />
                     </motion.h2>
                     <motion.p 
-                      className="text-dark/70"
+                      className="text-dark/70 text-sm sm:text-base md:text-lg px-4"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
@@ -289,11 +290,11 @@ const TechnologiesPage: React.FC = () => {
                     </motion.p>
                   </motion.div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                     {category.technologies.map((tech, index) => (
                       <motion.div
                         key={tech.name}
-                        className="p-6 bg-white rounded-xl shadow-lg border border-primary/10 transition-all duration-300"
+                        className="p-4 sm:p-6 bg-white rounded-xl shadow-lg border border-primary/10 transition-all duration-300"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -305,11 +306,11 @@ const TechnologiesPage: React.FC = () => {
                         }}
                       >
                         <motion.div 
-                          className="flex items-center gap-4 mb-4"
+                          className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4"
                           whileHover={{ x: 5 }}
                         >
                           <motion.div 
-                            className="w-12 h-12 flex items-center justify-center"
+                            className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center"
                             whileHover={{ 
                               scale: 1.1, 
                               rotate: 5
@@ -318,18 +319,18 @@ const TechnologiesPage: React.FC = () => {
                             <img 
                               src={tech.icon} 
                               alt={tech.name} 
-                              className="w-8 h-8 object-contain"
+                              className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                             />
                           </motion.div>
                           <motion.h3 
-                            className="text-xl font-bold flex-1 text-left"
+                            className="text-lg sm:text-xl font-bold flex-1 text-left"
                             whileHover={{ color: "var(--primary)" }}
                           >
                             {tech.name}
                           </motion.h3>
                         </motion.div>
                         <motion.p 
-                          className="text-dark/70 text-left"
+                          className="text-dark/70 text-sm sm:text-base text-left"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.1 }}
@@ -347,10 +348,10 @@ const TechnologiesPage: React.FC = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="py-20">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="py-12 sm:py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
           <motion.div
-            className="text-center bg-gradient-to-r from-primary to-secondary p-12 rounded-2xl text-white relative overflow-hidden"
+            className="text-center bg-gradient-to-r from-primary to-secondary p-6 sm:p-8 md:p-12 rounded-2xl text-white relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -367,20 +368,20 @@ const TechnologiesPage: React.FC = () => {
               }}
               transition={{ duration: 10, repeat: Infinity }}
             />
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 relative z-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 relative z-10">
               Ready to Build Something Amazing ?
             </h2>
-            <p className="text-xl text-white/90 mb-8 relative z-10">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 relative z-10">
               Let's create something extraordinary together.<br/>
               Our expertise, your vision.
             </p>
             <motion.button
-              className="bg-white text-primary px-8 py-4 rounded-full font-medium inline-flex items-center gap-2"
+              className="bg-white text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium inline-flex items-center gap-2 text-sm sm:text-base"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Start Your Project
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </motion.button>
           </motion.div>
         </div>
@@ -388,7 +389,7 @@ const TechnologiesPage: React.FC = () => {
 
       {/* Background Elements */}
       <motion.div 
-        className="absolute top-40 right-0 w-64 h-64 rounded-full bg-gradient-to-r from-primary/10 to-secondary/5 blur-3xl -z-10"
+        className="absolute top-40 right-0 w-48 sm:w-64 h-48 sm:h-64 rounded-full bg-gradient-to-r from-primary/10 to-secondary/5 blur-3xl -z-10"
         animate={{ 
           x: [0, -50, 0],
           y: [0, 30, 0],
@@ -399,7 +400,7 @@ const TechnologiesPage: React.FC = () => {
       />
       
       <motion.div 
-        className="absolute bottom-40 left-0 w-80 h-80 rounded-full bg-gradient-to-r from-secondary/10 to-primary/5 blur-3xl -z-10"
+        className="absolute bottom-40 left-0 w-60 sm:w-80 h-60 sm:h-80 rounded-full bg-gradient-to-r from-secondary/10 to-primary/5 blur-3xl -z-10"
         animate={{ 
           x: [0, 50, 0],
           y: [0, -30, 0],
