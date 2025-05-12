@@ -1,1 +1,4 @@
 /// <reference types="vite/client" />
+
+VITE_SUPABASE_URL=https://qmsdsgasczmyuyutacci.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtc2RzZ2FzY3pteXV5dXRhY2NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYxNzQzMzUsImV4cCI6MjA2MTc1MDMzNX0.h9ej_io1rli3t4tWHdnYQRlyBgQIZAspcjDJatyInZo

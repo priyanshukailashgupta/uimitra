@@ -45,97 +45,96 @@ const AboutSection: React.FC = () => {
     <section 
       id="about"
       ref={sectionRef} 
-      className="relative min-h-screen flex items-center justify-center py-20"
+      className="relative w-full min-h-screen py-12 sm:py-16 md:py-20 overflow-hidden"
     >
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {/* Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-40">
-        <motion.div
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-20 sm:mb-32 md:mb-40">
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h1 
-              className="text-5xl md:text-7xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6 sm:space-y-8"
           >
-            <AnimatedText text="UI Mitra" type="highlight" /> 
-          </motion.h1>
+            <motion.h1 
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <AnimatedText text="UI Mitra" type="highlight" /> 
+            </motion.h1>
 
-          <motion.h2 
-            className="text-2xl md:text-3xl font-semibold mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-              Your Gateway to <AnimatedText text="Growth" type="highlight" />,{' '}
-              <AnimatedText text="Innovation" type="highlight" delay={0.2} />, and{' '}
-              <AnimatedText text="Lasting Connections" type="highlight" delay={0.4} />
-          </motion.h2>
+            <motion.h2 
+              className="text-xl sm:text-2xl md:text-3xl font-semibold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+               <AnimatedText text="UI" type="highlight" /> {' '}Meets <AnimatedText text="Trust" type="highlight" />,{' '}
+              <AnimatedText text="UX" type="highlight" delay={0.2} /> {' '}Meets <AnimatedText text="Mitra" type="highlight" /> 
+            </motion.h2>
 
-          <motion.p 
-              className="text-lg text-dark/70 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-              At UI Mitra, we believe that great things happen when creativity and community come together.
-              We are a fast-growing platform where UI/UX designers, developers, and creative minds collaborate,
-              grow, and succeed — all built on a foundation of friendship and shared growth.
-          </motion.p>
+            <motion.p 
+              className="text-base sm:text-lg text-dark/70"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+             At UI Mitra, we believe powerful experiences are built on trust and connection. We are a fast-growing community where UI/UX designers, developers, and creative thinkers unite to create, collaborate, and thrive — all rooted in mutual respect, innovation, and shared success.
+            </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="pt-4"
+            >
               <Link to="/join">
-              <motion.button
-                className="bg-primary text-white px-8 py-4 rounded-full font-medium text-lg relative overflow-hidden group"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 0 20px rgba(237, 24, 79, 0.4)"
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
+                <motion.button
+                  className="bg-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-base sm:text-lg relative overflow-hidden group w-full sm:w-auto"
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 0 20px rgba(237, 24, 79, 0.4)"
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                >
                   <span className="relative z-10">Join UI Mitra Today</span>
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-primary to-secondary"
-                  initial={{ x: "100%" }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.4 }}
-                />
-              </motion.button>
-            </Link>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-r from-primary to-secondary"
+                    initial={{ x: "100%" }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </motion.button>
+              </Link>
+            </motion.div>
           </motion.div>
-        </motion.div>
 
           {/* Stats Section */}
           <motion.div
-            className="grid grid-cols-1 gap-6"
+            className="grid grid-cols-1 gap-4 sm:gap-6"
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8 }}
           >
             {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-                className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-primary/10 shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, delay: 0.8 + index * 0.2 }}
+              <motion.div
+                key={index}
+                className="bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-primary/10 shadow-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.8, delay: 0.8 + index * 0.2 }}
                 whileHover={{ y: -5, scale: 1.02 }}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                     {stat.icon}
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-primary">{stat.number}</div>
-                    <p className="text-dark/70">{stat.label}</p>
+                    <div className="text-2xl sm:text-3xl font-bold text-primary">{stat.number}</div>
+                    <p className="text-sm sm:text-base text-dark/70">{stat.label}</p>
                   </div>
                 </div>
               </motion.div>
@@ -145,40 +144,30 @@ const AboutSection: React.FC = () => {
 
         {/* Features Section */}
         <motion.div
-          className="space-y-16 mb-20"
+          className="space-y-12 sm:space-y-16 mb-16 sm:mb-20"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
           {/* Section Heading */}
           <motion.div
-            className="text-center mb-16 relative"
+            className="text-center mb-12 sm:mb-16 relative"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <motion.div
-              className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20"
-              initial={{ scale: 0, rotate: 0 }}
-              whileInView={{ scale: 1, rotate: 360 }}
-              transition={{ duration: 1, ease: "easeInOut" }}
-              viewport={{ once: true }}
-            >
-              
-            </motion.div>
-
             <motion.h2 
-              className="text-4xl md:text-5xl font-bold mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              What Makes  <AnimatedText text="UI Mitra" type="highlight" />  Different?
+              What Makes <AnimatedText text="UI Mitra" type="highlight" /> Different?
             </motion.h2>
             <motion.p 
-              className="text-xl text-dark/70 max-w-3xl mx-auto"
+              className="text-lg sm:text-xl text-dark/70 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -191,7 +180,7 @@ const AboutSection: React.FC = () => {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center relative`}
+              className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-6 sm:gap-8 items-center relative`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -207,7 +196,7 @@ const AboutSection: React.FC = () => {
               
               <div className="w-full md:w-1/2 relative z-10">
                 <motion.div 
-                  className="bg-white rounded-xl shadow-lg p-6 border border-primary/10"
+                  className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-primary/10"
                   whileHover={{ 
                     y: -5,
                     boxShadow: "0 10px 30px rgba(237, 24, 79, 0.1)"
@@ -215,20 +204,20 @@ const AboutSection: React.FC = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div 
-                    className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6"
+                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4 sm:mb-6"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   >
                     {feature.icon}
                   </motion.div>
                   <motion.h3 
-                    className="text-2xl font-bold mb-4"
+                    className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4"
                     whileHover={{ color: "var(--primary)" }}
                     transition={{ duration: 0.3 }}
                   >
                     {feature.title}
                   </motion.h3>
                   <motion.p 
-                    className="text-dark/70 text-lg"
+                    className="text-base sm:text-lg text-dark/70"
                     whileHover={{ color: "var(--dark)" }}
                     transition={{ duration: 0.3 }}
                   >
@@ -237,7 +226,7 @@ const AboutSection: React.FC = () => {
                 </motion.div>
               </div>
               
-              <div className="w-full md:w-1/2 h-64 flex items-center justify-center relative z-10">
+              <div className="w-full md:w-1/2 h-48 sm:h-64 flex items-center justify-center relative z-10">
                 {index === 0 && (
                   <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                     {/* Animated Learning Process */}
@@ -526,8 +515,6 @@ const AboutSection: React.FC = () => {
             </motion.div>
           ))}
         </motion.div>
-
-       
       </div>
     </section>
   );

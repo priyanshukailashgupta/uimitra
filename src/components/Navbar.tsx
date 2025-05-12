@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Infinity, ChevronDown, Menu, X, MessageCircle } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import UimitraLogo from '../assets/Uimitra..svg';
 
 interface MenuItem {
   name: string;
@@ -169,6 +170,7 @@ const serviceCategories: Category[] = [
 ];
 
 const navItems: NavItemProps[] = [
+  { name: 'Home', href: '/' },
   { 
     name: 'Company', 
     href: '/company', 
@@ -187,6 +189,17 @@ const navItems: NavItemProps[] = [
   { name: 'Work', href: '/work' }
 ];
 
+function scrollToHero() {
+  const heroSection = document.getElementById('hero');
+  if (heroSection) {
+    const yOffset = -100; // Adjust this value to match your Navbar height
+    const y = heroSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
 const NavItem: React.FC<{ 
   item: NavItemProps; 
   isActive: boolean; 
@@ -204,7 +217,11 @@ const NavItem: React.FC<{
 
   const handleClick = (e: React.FormEvent, href: string) => {
     e.preventDefault();
-    navigate(href);
+    if (item.name === 'Home') {
+      scrollToHero();
+    } else {
+      navigate(href);
+    }
     onClick();
     setIsHovered(false);
     setExpandedCategory(null);
@@ -229,8 +246,10 @@ const NavItem: React.FC<{
         exit={{ opacity: 0, x: -20 }}
       >
         <motion.button
-          className="w-full flex items-center justify-between px-8 py-5 text-lg font-medium text-white/90 hover:text-white"
-          onClick={() => setIsHovered(!isHovered)}
+          className={`w-full flex items-center justify-between px-8 py-5 text-lg font-medium ${
+            item.name === 'Home' ? 'text-white/90' : isActive ? 'text-primary' : 'text-white/90'
+          } hover:text-primary transition-colors`}
+          onClick={(e) => handleClick(e, item.href)}
           whileTap={{ scale: 0.98 }}
         >
           {item.name}
@@ -310,15 +329,14 @@ const NavItem: React.FC<{
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.button
-        className={`text-sm font-medium flex items-center gap-1 py-2 ${
-          isActive ? 'text-primary' : 'text-gray-800'
+        className={`text-sm md:text-xs lsm:text-xs lg:text-sm font-medium flex items-center gap-1 py-2 ${
+          item.name === 'Home' ? 'text-gray-800' : isActive ? 'text-primary' : 'text-gray-800'
         } hover:text-primary transition-colors`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => {
+        onClick={(e) => {
           if (!item.categories) {
-            navigate(item.href);
-            onClick();
+            handleClick(e, item.href);
           }
         }}
       >
@@ -342,14 +360,14 @@ const NavItem: React.FC<{
               className={`fixed left-1/2 -translate-x-1/2 bg-white rounded-lg shadow-lg overflow-hidden z-50 ${item.dropdownWidth || 'w-[1000px]'}`}
               style={{ top: '60px' }}
             >
-              <div className="p-8">
+              <div className="p-4 md:p-6 lg:p-8">
                 <div className={getDropdownStyles()}>
                   {item.categories.map((category, index) => (
-                    <div key={index} className="space-y-6">
+                    <div key={index} className="space-y-4 md:space-y-6">
                       {category.title && (
-                        <h4 className="font-semibold text-gray-900 mb-6">{category.title}</h4>
+                        <h4 className="font-semibold text-gray-900 text-sm md:text-base lg:text-base mb-4 md:mb-6">{category.title}</h4>
                       )}
-                      <div className="space-y-6">
+                      <div className="space-y-4 md:space-y-6">
                         {category.items.map((menuItem, itemIndex) => (
                           <motion.a
                             key={itemIndex}
@@ -359,21 +377,21 @@ const NavItem: React.FC<{
                             whileHover={{ x: 5 }}
                           >
                             {menuItem.image && (
-                              <div className="mb-4 rounded-lg overflow-hidden">
+                              <div className="mb-3 md:mb-4 rounded-lg overflow-hidden">
                                 <img 
                                   src={menuItem.image} 
                                   alt={menuItem.name}
-                                  className="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-105"
+                                  className="w-full h-32 md:h-40 lg:h-48 object-cover transform transition-transform duration-300 group-hover:scale-105"
                                 />
                               </div>
                             )}
                             <div className="flex items-center gap-2">
                               <div className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
-                              <div className="font-medium text-gray-900 group-hover:text-primary">
+                              <div className="font-medium text-gray-900 group-hover:text-primary text-sm md:text-base lg:text-base">
                                 {menuItem.name}
                               </div>
                             </div>
-                            <div className="text-sm text-gray-500 ml-3.5">
+                            <div className="text-xs md:text-sm lg:text-sm text-gray-500 ml-3.5">
                               {menuItem.description}
                             </div>
                           </motion.a>
@@ -420,62 +438,51 @@ const GetInTouchButton: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }
 
 const Navbar: React.FC = () => {
   const [activeItem, setActiveItem] = useState('Home');
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [mobileMenuOpen]);
-
   const handleLogoClick = () => {
-    // Close mobile menu if open
-    setMobileMenuOpen(false);
-    
-    // Force a hard navigation to the home page
+    setIsOpen(false);
     window.location.href = '/';
   };
 
   return (
-    <motion.nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-white'
-      }`}
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex items-center justify-between">
-          <button 
-            onClick={handleLogoClick}
-            className="flex items-center space-x-2 z-10 group"
-          >
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+    }`}>
+      <div className="max-w-7xl mx-auto px-2 msm:px-3 lsm:px-4 md:px-6 lg:px-8 xl:px-16 4k:px-32">
+        <div className="flex items-center justify-between h-14 msm:h-16 lsm:h-18 md:h-20 lg:h-24 xl:h-28 4k:h-32">
+          {/* Logo */}
+          <div className="flex items-center">
             <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-              className="group-hover:text-primary transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleLogoClick}
+              className="cursor-pointer"
             >
-              <Infinity size={32} className="text-primary" />
+              <div className="flex items-center gap-1 msm:gap-2 lsm:gap-3 md:gap-4">
+                <img 
+                  src={UimitraLogo} 
+                  alt="UI Mitra Logo" 
+                  className="w-16 h-16 msm:w-20 msm:h-20 lsm:w-24 lsm:h-24 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 4k:w-36 4k:h-36 group-hover:opacity-80 transition-opacity"
+                />
+              </div>
             </motion.div>
-            <span className="font-bold text-xl group-hover:text-primary transition-colors">UI Mitra</span>
-          </button>
+          </div>
 
-          <div className="hidden lg:flex items-center space-x-16">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4 lsm:space-x-6 md:space-x-8 lg:space-x-10 xl:space-x-12 4k:space-x-16">
             {navItems.map((item) => (
               <NavItem
                 key={item.name}
@@ -487,72 +494,50 @@ const Navbar: React.FC = () => {
             <GetInTouchButton />
           </div>
 
-          <motion.button
-            className="lg:hidden z-50 w-10 h-10 flex items-center justify-center"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            whileTap={{ scale: 0.95 }}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
           >
-            <AnimatePresence mode="wait">
-              {mobileMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -180, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 180, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <X className="w-6 h-6 text-white" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 180, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -180, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Menu className="w-6 h-6 text-dark" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
-
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div
-                className="fixed inset-0 min-h-screen bg-dark lg:hidden z-40"
-                initial={{ opacity: 0, x: "100%" }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              >
-                <div className="flex flex-col h-full">
-                  <div className="flex-1 overflow-y-auto pt-20">
-                    <div className="space-y-2">
-                      {navItems.map((item) => (
-                        <NavItem
-                          key={item.name}
-                          item={item}
-                          isActive={activeItem === item.name}
-                          onClick={() => {
-                            setActiveItem(item.name);
-                            if (!item.categories) setMobileMenuOpen(false);
-                          }}
-                          isMobile
-                        />
-                      ))}
-                    </div>
-                    <div className="px-8">
-                      <GetInTouchButton isMobile />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+            {isOpen ? (
+              <X className="h-5 w-5 msm:h-6 msm:w-6 text-gray-700" />
+            ) : (
+              <Menu className="h-5 w-5 msm:h-6 msm:w-6 text-gray-700" />
             )}
-          </AnimatePresence>
+          </button>
         </div>
       </div>
-    </motion.nav>
+
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-[#000F23] text-white"
+          >
+            <div className="px-4 py-4 space-y-4">
+              {navItems.map((item) => (
+                <NavItem
+                  key={item.name}
+                  item={item}
+                  isActive={activeItem === item.name}
+                  onClick={() => {
+                    setActiveItem(item.name);
+                    setIsOpen(false);
+                  }}
+                  isMobile
+                />
+              ))}
+              <div className="px-8 pt-4">
+                <GetInTouchButton isMobile />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

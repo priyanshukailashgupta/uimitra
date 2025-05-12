@@ -40,6 +40,10 @@ import ParallaxText from './components/ParallaxText';
 import UIUXGraphicDesignPage from './components/UIUXGraphicDesignPage';
 import DigitalMarketing from './components/DigitalMarketing';
 import SocialMedia from './components/SocialMedia';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
+import LetsConnectPage from './components/LetsConnectPage';
+import CookiePolicyPage from './components/CookiePolicyPage';
+import TermsPage from './components/TermsPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -277,6 +281,16 @@ function App() {
             <Footer />
           </>
         } />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/lets-connect" element={
+          <>
+            <Navbar />
+            <LetsConnectPage />
+            <Footer />
+          </>
+        } />
+        <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
         <Route path="/" element={
           <motion.div 
             className="relative"
@@ -285,29 +299,6 @@ function App() {
           >
             <Navbar />
             <Hero />
-            
-            <div className="bg-white">
-              <AnimatedSection className="py-20">
-                <ParallaxText baseVelocity={3} className="py-16" delay={300}>
-                  <span className="text-6xl md:text-7xl font-bold tracking-wider text-gradient">
-                    DESIGN • DEVELOP • DELIVER • &nbsp;
-                  </span>
-                </ParallaxText>
-              </AnimatedSection>
-
-              <AnimatedSection>
-                <AboutSection />
-              </AnimatedSection>
-
-              <AnimatedSection>
-                <ServicesSection />
-              </AnimatedSection>
-
-              <AnimatedSection>
-                <ContactSection />
-              </AnimatedSection>
-            </div>
-
             <Footer />
           </motion.div>
         } />
