@@ -220,7 +220,7 @@ const NavItem: React.FC<{
     if (item.name === 'Home') {
       scrollToHero();
     } else {
-      navigate(href);
+    navigate(href);
     }
     onClick();
     setIsHovered(false);
@@ -509,34 +509,34 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <AnimatePresence>
+          <AnimatePresence>
         {isOpen && (
-          <motion.div
+              <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-[#000F23] text-white"
           >
             <div className="px-4 py-4 space-y-4">
-              {navItems.map((item) => (
-                <NavItem
-                  key={item.name}
-                  item={item}
-                  isActive={activeItem === item.name}
-                  onClick={() => {
-                    setActiveItem(item.name);
+                      {navItems.map((item) => (
+                        <NavItem
+                          key={item.name}
+                          item={item}
+                          isActive={activeItem === item.name}
+                          onClick={() => {
+                            setActiveItem(item.name);
                     setIsOpen(false);
-                  }}
-                  isMobile
-                />
-              ))}
+                          }}
+                          isMobile
+                        />
+                      ))}
               <div className="px-8 pt-4">
-                <GetInTouchButton isMobile />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                      <GetInTouchButton isMobile />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
     </nav>
   );
 };

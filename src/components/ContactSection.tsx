@@ -55,17 +55,17 @@ const ContactSection: React.FC = () => {
       }
 
       console.log('Form submission successful:', data);
-      setFormStatus('success');
+    setFormStatus('success');
       setFormData({
         name: '',
         email: '',
         message: ''
       });
-      
-      // Reset form after success
-      if (formRef.current) {
-        formRef.current.reset();
-      }
+    
+    // Reset form after success
+    if (formRef.current) {
+      formRef.current.reset();
+    }
       
       // Reset form status after 3 seconds
       setTimeout(() => {

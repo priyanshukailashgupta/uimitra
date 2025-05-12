@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
-        
+
         <motion.div 
           className="absolute bottom-0 left-0 w-72 h-72 sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-to-r from-secondary/10 to-primary/5 blur-3xl -z-10"
           animate={{ 
@@ -42,18 +42,18 @@ const Hero: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-10 sm:py-16 md:py-32">
           <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
               className="mb-6 sm:mb-8"
-            >
+          >
               <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-xs sm:text-lg font-medium">
                 Innovate • Design • Transform
               </span>
-            </motion.div>
+          </motion.div>
 
-            <motion.h1
+            <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -67,7 +67,7 @@ const Hero: React.FC = () => {
               <br />
             </motion.h1>
 
-            <motion.p
+            <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -76,13 +76,13 @@ const Hero: React.FC = () => {
               We're a creative tech studio crafting standout digital experiences through smart design and modern development for bold, ambitious brands.
             </motion.p>
 
-            <motion.div
+            <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full max-w-xs sm:max-w-none mx-auto"
             >
-              <motion.button
+                <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto bg-primary text-white px-8 py-3 sm:px-10 sm:py-5 rounded-full font-medium text-base sm:text-xl flex items-center justify-center gap-2 sm:gap-3"
@@ -90,7 +90,7 @@ const Hero: React.FC = () => {
               >
                 Book Now
                 <CalendarCheck className="w-5 h-5 sm:w-6 sm:h-6" />
-              </motion.button>
+                </motion.button>
               <Link to="/contact" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
