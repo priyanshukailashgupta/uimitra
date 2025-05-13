@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CalendarCheck, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ParallaxText from './ParallaxText';
 import AboutSection from './AboutSection';
 import ServicesSection from './ServicesSection';
@@ -9,6 +9,18 @@ import ContactSection from './ContactSection';
 import AnimatedSection from './AnimatedSection';
 
 const Hero: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Ensure the hero section is visible when the component mounts
+    const heroSection = document.getElementById('hero');
+    if (heroSection && location.pathname === '/') {
+      const yOffset = -100;
+      const y = heroSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }, [location.pathname]);
+
   const handleBookNow = () => {
     window.open('https://outlook.office.com/owa/calendar/MeetwithTeamUimitra@yatricloud.com/bookings/', '_blank');
   };
@@ -16,7 +28,7 @@ const Hero: React.FC = () => {
   return (
     <div id="hero" className="relative overflow-hidden bg-gradient-to-b from-white to-light">
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center justify-center">
+      <div className="relative flex items-center justify-center">
         {/* Background Elements */}
         <motion.div 
           className="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-primary/10 to-secondary/5 blur-3xl -z-10"
@@ -40,15 +52,15 @@ const Hero: React.FC = () => {
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-10 sm:py-16 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 min-h-[85vh] flex flex-col justify-center -mt-4 sm:mt-0 sm:min-h-[80vh] pt-0 pb-0">
           <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-              className="mb-6 sm:mb-8"
+            className="mb-2 sm:mb-3"
           >
-              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-xs sm:text-lg font-medium">
+              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm sm:text-lg font-medium">
                 Innovate • Design • Transform
               </span>
           </motion.div>
@@ -57,7 +69,7 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 sm:mb-8 leading-tight"
+              className="text-4xl xs:text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-8 leading-tight"
             >
               Design that
               <br />
@@ -71,7 +83,7 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base xs:text-lg sm:text-xl md:text-2xl text-gray-600 max-w-md sm:max-w-3xl mx-auto mb-8 sm:mb-12"
+              className="text-base xs:text-lg sm:text-xl md:text-2xl text-gray-600 max-w-md sm:max-w-3xl mx-auto mb-6 sm:mb-12"
             >
               We're a creative tech studio crafting standout digital experiences through smart design and modern development for bold, ambitious brands.
             </motion.p>
@@ -108,8 +120,8 @@ const Hero: React.FC = () => {
 
       {/* Parallax Section */}
       <div className="bg-white">
-        <AnimatedSection className="py-20">
-          <ParallaxText baseVelocity={3} className="py-16" delay={300}>
+        <AnimatedSection className="py-4 sm:py-12 md:py-20 lg:py-28">
+          <ParallaxText baseVelocity={3} className="py-4 sm:py-8 md:py-12" delay={300}>
             <span className="text-6xl md:text-7xl font-bold tracking-wider text-gradient">
               DESIGN • DEVELOP • DELIVER • &nbsp;
             </span>

@@ -92,7 +92,7 @@ const ContactSection: React.FC = () => {
       delay: 0.2
     },
     {
-      icon: <MapPin size={20} />,
+      icon: <MapPin size={20}  className="mx-4"/>,
       title: "Location",
       value: "E10, Green Glen Layout, Outer Ring Road, Bellandur, Bengaluru, Karnataka, India - 560103",
       delay: 0.3

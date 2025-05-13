@@ -176,9 +176,9 @@ const TechnologiesPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-16 sm:pt-20 md:pt-24 pb-20 relative overflow-hidden" ref={sectionRef}>
+    <div className="min-h-screen pt-0 pb-20 relative overflow-hidden" ref={sectionRef}>
       {/* Hero Section */}
-      <div className="relative overflow-hidden py-12 sm:py-16 md:py-20">
+      <div className="relative overflow-hidden py-6 sm:py-10 md:py-14">
         <motion.div 
           className="absolute inset-0"
           style={{

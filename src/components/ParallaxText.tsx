@@ -1,87 +1,77 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
 
 interface ParallaxTextProps {
   children: React.ReactNode;
-  baseVelocity?: number;
+  baseVelocity?: number; // pixels per scroll event
   className?: string;
-  delay?: number;
 }
 
-const ParallaxText: React.FC<ParallaxTextProps> = ({ 
-  children, 
+const REPEAT_COUNT = 20;
+
+const ParallaxText: React.FC<ParallaxTextProps> = ({
+  children,
   baseVelocity = 3,
   className = "",
-  delay = 0
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: false, amount: 0.1 });
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
 
-  // Reset scroll progress when section comes into view
-  useEffect(() => {
-    if (isInView) {
-      setScrollProgress(0);
-      // Add delay before starting animation
-      const timer = setTimeout(() => {
-        setShouldAnimate(true);
-      }, delay);
-      return () => clearTimeout(timer);
-    } else {
-      setShouldAnimate(false);
+  // Measure the width of the content
+  useLayoutEffect(() => {
+    if (contentRef.current) {
+      setContentWidth(contentRef.current.scrollWidth / REPEAT_COUNT);
     }
-  }, [isInView, delay]);
+  }, [children]);
 
-  // Enhanced spring config for smoother animation
-  const springConfig = { 
-    mass: 1,
-    stiffness: 50,
-    damping: 20
-  };
+  // Track scroll direction
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrollDirection(currentY > lastY ? 'down' : 'up');
+      lastY = currentY;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  // Start from 0% (left edge) and move to the left as user scrolls
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ['0%', `-${baseVelocity * 100}%`]
-  );
-
-  const smoothX = useSpring(x, springConfig);
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.9, 1],
-    [0.8, 1, 1, 0.8]
-  );
+  // Animate marquee effect on scroll
+  useEffect(() => {
+    let animationFrame: number;
+    const animate = () => {
+      setOffset(prev => {
+        let next = prev + (scrollDirection === 'down' ? baseVelocity : -baseVelocity);
+        // Wrap for seamless effect
+        if (contentWidth > 0) {
+          next = ((next % (contentWidth * REPEAT_COUNT)) + (contentWidth * REPEAT_COUNT)) % (contentWidth * REPEAT_COUNT);
+        }
+        return next;
+      });
+      animationFrame = requestAnimationFrame(animate);
+    };
+    animate();
+    return () => cancelAnimationFrame(animationFrame);
+  }, [scrollDirection, baseVelocity, contentWidth]);
 
   return (
-    <div 
-      ref={containerRef} 
-      className={`overflow-hidden py-12 ${className}`}
-    >
-      <motion.div
-        style={{ 
-          x: shouldAnimate ? smoothX : 0,
-          opacity
-        }}
-        className="flex whitespace-nowrap gap-12"
-        initial={{ x: 0 }}
-        transition={{ 
-          type: "spring", 
-          stiffness: 50, 
-          damping: 20,
-          mass: 1
+    <div ref={containerRef} className={`overflow-hidden py-12 mt-12 ${className}`}>
+      <div
+        ref={contentRef}
+        style={{
+          display: 'flex',
+          whiteSpace: 'nowrap',
+          gap: '3rem',
+          transform: `translateX(-${offset}px)`,
+          willChange: 'transform',
         }}
       >
-        <span className="text-gradient">{children}</span>
-        <span className="text-gradient">{children}</span>
-        <span className="text-gradient">{children}</span>
-      </motion.div>
+        {Array.from({ length: REPEAT_COUNT }).map((_, i) => (
+          <span className="text-gradient" key={i}>{children}</span>
+        ))}
+      </div>
     </div>
   );
 };

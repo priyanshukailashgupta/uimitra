@@ -156,7 +156,7 @@ const Footer: React.FC = () => {
           >
             <Link to="/" className="flex items-center gap-2 group">
               <motion.div
-                className="flex items-center -mt-9"
+                className="flex items-center -mt-10"
               >
                 <img 
                   src={UimitraLightLogo} 
@@ -165,7 +165,7 @@ const Footer: React.FC = () => {
                 />
               </motion.div>
             </Link>
-            <p className="text-gray-400">
+            <p className="text-gray-400 mt-0">
               UI Meets Trust. UX Meets Mitra.
             </p>
             <div className="space-y-4">

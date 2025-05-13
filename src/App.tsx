@@ -292,15 +292,11 @@ function App() {
         <Route path="/cookie-policy" element={<CookiePolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/" element={
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, y: 20 }}
-            animate={controls}
-          >
+          <>
             <Navbar />
             <Hero />
             <Footer />
-          </motion.div>
+          </>
         } />
       </Routes>
     </Router>

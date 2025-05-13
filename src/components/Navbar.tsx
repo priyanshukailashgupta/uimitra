@@ -186,7 +186,7 @@ const navItems: NavItemProps[] = [
     dropdownWidth: 'w-[1400px] mx-[-900px]',
     dropdownStyle: 'services'
   },
-  { name: 'Work', href: '/work' }
+  // { name: 'Work', href: '/work' }
 ];
 
 function scrollToHero() {
@@ -195,8 +195,6 @@ function scrollToHero() {
     const yOffset = -100; // Adjust this value to match your Navbar height
     const y = heroSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
     window.scrollTo({ top: y, behavior: 'smooth' });
-  } else {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 
@@ -213,18 +211,25 @@ const NavItem: React.FC<{
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
+  const [expandedSubheading, setExpandedSubheading] = useState<number | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = (e: React.FormEvent, href: string) => {
     e.preventDefault();
     if (item.name === 'Home') {
+      if (location.pathname === '/') {
       scrollToHero();
+      } else {
+        navigate('/');
+      }
     } else {
     navigate(href);
     }
     onClick();
     setIsHovered(false);
     setExpandedCategory(null);
+    setExpandedSubheading(null);
   };
 
   const getDropdownStyles = () => {
@@ -249,23 +254,29 @@ const NavItem: React.FC<{
           className={`w-full flex items-center justify-between px-8 py-5 text-lg font-medium ${
             item.name === 'Home' ? 'text-white/90' : isActive ? 'text-primary' : 'text-white/90'
           } hover:text-primary transition-colors`}
-          onClick={(e) => handleClick(e, item.href)}
+          onClick={(e) => {
+            if (item.categories) {
+              setExpandedCategory(expandedCategory === 0 ? null : 0);
+            } else {
+              handleClick(e, item.href);
+            }
+          }}
           whileTap={{ scale: 0.98 }}
         >
           {item.name}
           {item.categories && (
             <ChevronDown 
               size={20} 
-              className={`transition-transform duration-300 ${isHovered ? 'rotate-180' : ''}`} 
+              className={`transition-transform duration-300 ${expandedCategory === 0 ? 'rotate-180' : ''}`} 
             />
           )}
         </motion.button>
 
         <AnimatePresence>
-          {isHovered && item.categories && (
+          {item.categories && expandedCategory === 0 && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
+              animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="bg-white/5"
@@ -273,23 +284,22 @@ const NavItem: React.FC<{
               <div className="py-4">
                 {item.categories.map((category, index) => (
                   <div key={index} className="px-8 py-2">
-                    {category.title && (
-                      <motion.button
-                        className="flex items-center justify-between w-full text-white/80 font-medium py-2"
-                        onClick={() => setExpandedCategory(expandedCategory === index ? null : index)}
-                      >
-                        {category.title}
-                        <ChevronDown 
-                          size={16} 
-                          className={`transition-transform duration-300 ${expandedCategory === index ? 'rotate-180' : ''}`}
-                        />
-                      </motion.button>
-                    )}
+                    {index !== 0 && <div className="h-2" />}
+                    <button
+                      className="flex items-center justify-between w-full text-white/80 font-semibold text-sm whitespace-normal break-words py-2 focus:outline-none"
+                      onClick={() => setExpandedSubheading(expandedSubheading === index ? null : index)}
+                    >
+                      {category.title}
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-300 ${expandedSubheading === index ? 'rotate-180' : ''}`}
+                      />
+                    </button>
                     <AnimatePresence>
-                      {(!category.title || expandedCategory === index) && (
+                      {expandedSubheading === index && (
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
+                          animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.2 }}
                           className="space-y-3 mt-2"
@@ -304,9 +314,11 @@ const NavItem: React.FC<{
                             >
                               <div className="flex items-center gap-2">
                                 <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
-                                <div className="font-medium">{menuItem.name}</div>
+                                <div className="flex flex-col">
+                                  <span className="font-medium">{menuItem.name}</span>
+                                  <span className="text-xs opacity-70 mt-1 ml-0">{menuItem.description}</span>
+                                </div>
                               </div>
-                              <div className="text-sm opacity-70 ml-3.5">{menuItem.description}</div>
                             </motion.a>
                           ))}
                         </motion.div>
@@ -438,33 +450,72 @@ const GetInTouchButton: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }
 
 const Navbar: React.FC = () => {
   const [activeItem, setActiveItem] = useState('Home');
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY < lastScrollY) {
+            setShowNavbar(true); // Scrolling up
+          } else if (window.scrollY > 50) {
+            setShowNavbar(false); // Scrolling down
+          }
+          setLastScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
+
+  // Add effect to handle navigation and scrolling
+  useEffect(() => {
+    if (location.pathname === '/') {
+      // Wait for the page to be fully loaded
+      const timer = setTimeout(() => {
+        scrollToHero();
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname]);
 
   const handleLogoClick = () => {
     setIsOpen(false);
-    window.location.href = '/';
+    if (location.pathname === '/') {
+      scrollToHero();
+    } else {
+    navigate('/');
+    }
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
-    }`}>
+    <motion.nav
+      animate={{ y: showNavbar ? 0 : -100 }}
+      transition={{ duration: 0.3 }}
+      className={
+        'sticky top-0 z-50 transition-all duration-300 bg-white/30 backdrop-blur-md backdrop-saturate-150'
+      }
+    >
       <div className="max-w-7xl mx-auto px-2 msm:px-3 lsm:px-4 md:px-6 lg:px-8 xl:px-16 4k:px-32">
         <div className="flex items-center justify-between h-14 msm:h-16 lsm:h-18 md:h-20 lg:h-24 xl:h-28 4k:h-32">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center pl-4 md:pl-0">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -515,7 +566,7 @@ const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#000F23] text-white"
+            className="md:hidden bg-[#000F23] text-white fixed left-0 top-14 w-full z-50 h-[calc(100vh-3.5rem)] overflow-y-auto"
           >
             <div className="px-4 py-4 space-y-4">
                       {navItems.map((item) => (
@@ -537,7 +588,7 @@ const Navbar: React.FC = () => {
               </motion.div>
             )}
           </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 
