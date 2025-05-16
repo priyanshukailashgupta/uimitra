@@ -1,49 +1,49 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import AboutSection from './components/AboutSection';
+import Navbar from './components/Navbar/Navbar';
+import Hero from './components/Home/Hero';
+import AboutSection from './components/Home/AboutSection';
 import FloatingParticles from './components/FloatingParticles';
-import ServicesSection from './components/ServicesSection';
-import ContactSection from './components/ContactSection';
-import UIUXSection from './components/UIUXSection';
+import ServicesSection from './components/Home/ServicesSection';
+import ContactSection from './components/Home/ContactSection';
+import UIUXSection from './components/Services/UIUXGraphics/UIUXSection';
 import ServicesPage from './components/ServicesPage';
-import AboutPage from './components/AboutPage';
-import ContactPage from './components/ContactPage';
-import TeamPage from './components/TeamPage';
-import SuccessStoriesPage from './components/SuccessStoriesPage';
-import WebDesignPage from './components/WebDesignPage';
-import LogoDesignPage from './components/LogoDesignPage';
-import AppDesignPage from './components/AppDesignPage';
-import GraphicsDesignPage from './components/GraphicsDesignPage';
-import BrandStrategyPage from './components/BrandStrategyPage';
-import BrandGuidelinesPage from './components/BrandGuidelinesPage';
-import BrandIdentityPage from './components/BrandIdentityPage';
-import BrandDevelopmentPage from './components/BrandDevelopmentPage';
-import BrandDesignBuildPage from './components/BrandDesignBuildPage';
-import DigitalMarketingPage from './components/DigitalMarketingPage';
-import SEOServicesPage from './components/SEOServicesPage';
-import SocialMediaMarketingPage from './components/SocialMediaMarketingPage';
-import EmailMarketingPage from './components/EmailMarketingPage';
-import AnalyticsReportingPage from './components/AnalyticsReportingPage';
-import YouTubeMarketingPage from './components/YouTubeMarketingPage';
-import LinkedInMarketingPage from './components/LinkedInMarketingPage';
-import TwitterMarketingPage from './components/TwitterMarketingPage';
-import InstagramMarketingPage from './components/InstagramMarketingPage';
-import OtherPlatformsPage from './components/OtherPlatformsPage';
-import TechnologiesPage from './components/TechnologiesPage';
-import AIEnhancedDesignPage from './components/AIEnhancedDesignPage';
-import Footer from './components/Footer';
+import AboutPage from './components/Company/AboutPage';
+import ContactPage from './components/Contact/ContactPage';
+import TeamPage from './components/Company/TeamPage';
+import SuccessStoriesPage from './components/Company/SuccessStoriesPage';
+import WebDesignPage from './components/Services/UIUXGraphics/WebDesignPage';
+import LogoDesignPage from './components/Services/Brand/LogoDesignPage';
+import AppDesignPage from './components/Services/UIUXGraphics/AppDesignPage';
+import GraphicsDesignPage from './components/Services/UIUXGraphics/GraphicsDesignPage';
+import BrandStrategyPage from './components/Services/Brand/BrandStrategyPage';
+import BrandGuidelinesPage from './components/Services/Brand/BrandGuidelinesPage';
+import BrandIdentityPage from './components/Services/Brand/BrandIdentityPage';
+import BrandDevelopmentPage from './components/Services/Brand/BrandDevelopmentPage';
+import DigitalMarketingPage from './components/Services/DigitalMarketing/DigitalMarketingPage';
+import SEOServicesPage from './components/Services/DigitalMarketing/SEOServicesPage';
+import SocialMediaMarketingPage from './components/Services/DigitalMarketing/SocialMediaMarketingPage';
+import EmailMarketingPage from './components/Services/DigitalMarketing/EmailMarketingPage';
+import AnalyticsReportingPage from './components/Services/DigitalMarketing/AnalyticsReportingPage';
+import YouTubeMarketingPage from './components/Services/SocialMedia/YouTubeMarketingPage';
+import LinkedInMarketingPage from './components/Services/SocialMedia/LinkedInMarketingPage';
+import TwitterMarketingPage from './components/Services/SocialMedia/TwitterMarketingPage';
+import InstagramMarketingPage from './components/Services/SocialMedia/InstagramMarketingPage';
+import OtherPlatformsPage from './components/Services/SocialMedia/OtherPlatformsPage';
+import TechnologiesPage from './components/Technology/TechnologiesPage';
+import AIEnhancedDesignPage from './components/Services/UIUXGraphics/AIEnhancedDesignPage';
+import Footer from './components/Footer/Footer';
 import AnimatedSection from './components/AnimatedSection';
-import ParallaxText from './components/ParallaxText';
-import UIUXGraphicDesignPage from './components/UIUXGraphicDesignPage';
-import DigitalMarketing from './components/DigitalMarketing';
-import SocialMedia from './components/SocialMedia';
-import PrivacyPolicyPage from './components/PrivacyPolicyPage';
-import LetsConnectPage from './components/LetsConnectPage';
-import CookiePolicyPage from './components/CookiePolicyPage';
-import TermsPage from './components/TermsPage';
+import ParallaxText from './components/Home/ParallaxText';
+import PrivacyPolicyPage from './components/Footer/policies/PrivacyPolicyPage';
+import LetsConnectPage from './components/Footer/LetsConnectPage';
+import CookiePolicyPage from './components/Footer/policies/CookiePolicyPage';
+import TermsPage from './components/Footer/policies/TermsPage';
+import UIUXGraphicDesignPage from './components/mainservice/UIUXGraphicDesignPage';
+import BrandDesignBuildPage from './components/mainservice/BrandDesignBuildPage';
+import DigitalMarketing from './components/mainservice/DigitalMarketing';
+import SocialMedia from './components/mainservice/SocialMedia';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -148,7 +148,7 @@ function App() {
             <Footer />
           </>
         } />        
-         <Route path="/services/digital-marketing" element={
+        <Route path="/services/digital-marketing" element={
           <>
             <Navbar />
             <DigitalMarketing />

@@ -152,7 +152,7 @@ const ServicesPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-20 relative overflow-hidden">
+    <div className="min-h-screen pb-20 relative overflow-hidden">
       {/* Floating Shapes */}
       <motion.div 
         className="absolute top-40 right-0 w-64 h-64"

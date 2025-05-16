@@ -1,8 +1,8 @@
-# UI Mitra - Digital Marketing & Design Agency Website
+# Uimitra - Digital Marketing & Design Agency Website
 
-A modern, responsive website built with React, TypeScript, and Tailwind CSS for a digital marketing and design agency. UI Mitra showcases various digital marketing and design services with beautiful animations and a user-friendly interface.
+A modern, responsive website built with React, TypeScript, and Tailwind CSS for a digital marketing and design agency. Uimitra showcases various digital marketing and design services with beautiful animations and a user-friendly interface.
 
-![UI Mitra Banner](public/banner.png)
+![Uimitra Banner](public/banner.png)
 
 ## 🌟 Features
 
@@ -103,7 +103,7 @@ uimitra/
 ### Environment Variables
 Create a `.env` file in the root directory:
 ```env
-VITE_APP_TITLE=UI Mitra
+VITE_APP_TITLE=Uimitra
 VITE_APP_DESCRIPTION=Digital Marketing & Design Agency
 ```
 
